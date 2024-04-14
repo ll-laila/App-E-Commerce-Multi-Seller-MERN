@@ -4,6 +4,8 @@ import Footer from "../components/Layout/Footer";
 import Header from "../components/Layout/Header";
 import ProductCard from "../components/Route/ProductCard/ProductCard";
 import styles from "../styles/styles";
+import { backend_url,server } from "../server";
+import axios from "axios";
 import { productData } from "../static/data";
 
 const ProductsPage = () => {
@@ -11,17 +13,27 @@ const ProductsPage = () => {
   const categoryData = searchParams.get("category");
   const [data, setData] = useState([]);
 
+  const [allProducts, setAllProducts] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${server}/product/get-all-products`).then((res) => {
+      setAllProducts(res.data.products);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }, []);
+  
   useEffect(() => {
     if (categoryData === null) {
-      const d = productData && productData.sort((a, b) => a.total_sell - b.total_sell);
+      const d = allProducts && allProducts.sort((a, b) => a.sold_out - b.sold_out);
       setData(d);
     } else {
       const d =
-      productData && productData.filter((i) => i.category === categoryData);
+      allProducts && allProducts.filter((i) => i.category === categoryData);
       setData(d);
     }
    
-  }, []);
+  }, [allProducts]);
 
   return (
       <div>

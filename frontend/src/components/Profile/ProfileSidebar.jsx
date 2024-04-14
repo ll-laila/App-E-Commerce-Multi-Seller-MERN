@@ -11,7 +11,6 @@ import { RxPerson } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { server } from "../../server";
-import { toast } from "react-toastify";
 
 //import { useSelector } from "react-redux";
 
@@ -23,7 +22,7 @@ const ProfileSidebar = ({ setActive, active }) => {
     axios
       .get(`${server}/user/logout`, { withCredentials: true })
       .then((res) => {
-       toast.success(res.data.message);
+       alert(res.data.message);
         navigate("/login"); 
         window.location.reload(true);
       })
@@ -112,7 +111,7 @@ const ProfileSidebar = ({ setActive, active }) => {
             active === 6 ? "text-[red]" : ""
           } 800px:block hidden`}
         >
-          Payment Methods
+          Change Password
         </span>
       </div>
 

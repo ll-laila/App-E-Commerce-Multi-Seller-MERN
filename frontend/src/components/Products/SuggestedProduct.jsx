@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
-//import { useSelector } from "react-redux";
 import { productData } from "../../static/data";
 import styles from "../../styles/styles";
 import ProductCard from "../Route/ProductCard/ProductCard";
+import axios from "axios";
+import { server } from "../../server";
 
 const SuggestedProduct = ({ data }) => {
-  //const {allProducts} = useSelector((state) => state.products);
+ 
   const [products,setProducts] = useState(null);
 
   useEffect(() => {
-    const d =
-    productData && productData.filter((i) => i.category === data.category);
-    setProducts(d);
+    axios.get(`${server}/product/get-all-products`).then((res) => {
+      const products =  res.data.products.filter((i) => i.category === data.category);
+      setProducts(products)
+    }).catch((err) => {
+      console.log(err);
+    })
   }, []);
+
 
   return (
     <div>

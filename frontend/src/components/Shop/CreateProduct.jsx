@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createProduct } from "../../redux/actions/product";
 import { categoriesData } from "../../static/data";
 import axios from "axios";
 import { server } from "../../server";
@@ -12,9 +11,7 @@ import { server } from "../../server";
 const CreateProduct = () => {
 
   const { seller } = useSelector((state) => state.seller);
-  const { success, error } = useSelector((state) => state.products);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const [images, setImages] = useState([]);
   const [name, setName] = useState("");
@@ -25,27 +22,50 @@ const CreateProduct = () => {
   const [discountPrice, setDiscountPrice] = useState();
   const [stock, setStock] = useState();
 
-  useEffect(() => {
-    if (error) {
-     alert(error);
-    }
-    if (success) {
-      alert("Product created successfully!")
-      navigate("/dashboard");
-    }
-  }, [dispatch, error, success]);
-  
-
-  const handleImageChange = (e) => {
-    const files = Array.from(e.target.files);
-    setImages((prevImages) => [...prevImages, ...files]);
-  };
 
   const handleSubmit = async (e) => {
-  };
+      e.preventDefault();
+      const config = { headers: { "Content-Type": "multipart/form-data" } };
+      const newForm = new FormData();
+      images.forEach((image) => {
+        newForm.append("images", image);
+      });
+      newForm.append("name", name);
+      newForm.append("description", description);
+      newForm.append("category", category);
+      newForm.append("tags", tags);
+      newForm.append("originalPrice", originalPrice);
+      newForm.append("discountPrice", discountPrice);
+      newForm.append("stock", stock);
+      newForm.append("shopId",seller._id);
 
 
+      axios.post(`${server}/product/create-product`, newForm,config
+      ).then((res) => {
+         alert(res.message);
+         setName("");
+         setDescription("");
+         setCategory("");
+         setTags("");
+         setOriginalPrice("");
+         setDiscountPrice("");
+         setStock("");
+         setImages([]);
+         navigate("/dashboard");
+         window.location.reload();
 
+      })
+      .catch((err) => {
+         alert(err.message)
+      })
+    };
+  
+    const handleImageChange = (e) => {
+      e.preventDefault();
+      let files = Array.from(e.target.files);
+      setImages((prevImages) => [...prevImages, ...files]);
+    };
+    
 
 
 
@@ -157,7 +177,7 @@ const CreateProduct = () => {
           />
         </div>
         <br />
-        <div>
+      <div>    
           <label className="pb-2">
             Upload Images <span className="text-red-500">*</span>
           </label>

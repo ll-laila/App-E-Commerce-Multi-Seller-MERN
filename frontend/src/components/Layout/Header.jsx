@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "../../styles/styles";
-import { categoriesData, productData } from "../../static/data";
+import { categoriesData } from "../../static/data";
 import {
   AiOutlineHeart,
   AiOutlineSearch,
@@ -16,9 +16,12 @@ import Navbar from "./Navbar";
 import Cart from "../cart/Cart";
 import Wishlist from "../Wishlist/Wishlist";
 import { RxCross1 } from "react-icons/rx";
-import { backend_url } from "../../server";
+import { backend_url,server } from "../../server";
+import axios from "axios";
+
 
 const Header = ({ activeHeading }) => {
+  const { isSeller } = useSelector((state) => state.seller);
   const { isAuthenticated, user, loading } = useSelector((state) => state.user);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState(null);
@@ -27,14 +30,27 @@ const Header = ({ activeHeading }) => {
   const [openCart, setOpenCart] = useState(false);
   const [openWishlist, setOpenWishlist] = useState(false);
   const [open, setOpen] = useState(false);
+  const { cart } = useSelector((state) => state.cart);
+  const { wishlist } = useSelector((state) => state.wishlist);
+
+
+  const [allProducts, setAllProducts] = useState([]);
+
+  useEffect(() => {
+    axios.get(`${server}/product/get-all-products`).then((res) => {
+      setAllProducts(res.data.products);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }, []);
 
   const handleSearchChange = (e) => {
     const term = e.target.value;
     setSearchTerm(term);
 
     const filteredProducts =
-      productData &&
-      productData.filter((product) =>
+        allProducts &&
+        allProducts.filter((product) =>
         product.name.toLowerCase().includes(term.toLowerCase())
       );
     setSearchData(filteredProducts);
@@ -77,13 +93,10 @@ const Header = ({ activeHeading }) => {
               <div className="absolute min-h-[30vh] bg-slate-50 shadow-sm-2 z-[9] p-4">
                 {searchData &&
                   searchData.map((i, index) => {
-                    const d = i.name;
-                    const Product_name = d.replace(/\s+/g, "-");
-
-                    return (
-                      <Link to={`/product/${Product_name}`}>
+                   return (
+                      <Link to={`/product/${i._id}`}>
                         <img
-                          src={`${i.image_Url[0].url}`}
+                         src={`${backend_url}${i.images[0]}`}
                           alt=""
                           className="w-[40px] h-[40px] mr-[10px]"
                         />
@@ -95,9 +108,9 @@ const Header = ({ activeHeading }) => {
             ) : null}
           </div>
           <div className={`${styles.button}`}>
-            <Link to="/shop-create">
+            <Link to={`${isSeller ? "/dashboard" : "/shop-create"}`}>
               <h1 className="text-[#fff] flex items-center">
-                Become Seller
+                {isSeller ? "Go Dashboard" : "Become Seller"}{" "}
                 <IoIosArrowForward className="ml-1" />
               </h1>
             </Link>
@@ -148,7 +161,7 @@ const Header = ({ activeHeading }) => {
               >
                 <AiOutlineHeart size={30} color="rgb(255 255 255 / 83%)" />
                 <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
-                  1 {/*wishlist && wishlist.length*/}
+                 { wishlist && wishlist.length}
                 </span>
               </div>
             </div>
@@ -163,7 +176,7 @@ const Header = ({ activeHeading }) => {
                   color="rgb(255 255 255 / 83%)"
                 />
                 <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
-                  1{/*cart && cart.length*/}
+                {cart && cart.length}
                 </span>
               </div>
             </div>
@@ -174,6 +187,7 @@ const Header = ({ activeHeading }) => {
                   <Link to="/profile">
                     <img
                       src={`${backend_url}${user.avatar}`}
+                      
                       className="w-[35px] h-[35px] rounded-full"
                       alt=""
                     />
@@ -228,7 +242,7 @@ const Header = ({ activeHeading }) => {
             >
               <AiOutlineShoppingCart size={30} />
               <span class="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px]  leading-tight text-center">
-                1
+              {cart && cart.length}
               </span>
             </div>
           </div>
