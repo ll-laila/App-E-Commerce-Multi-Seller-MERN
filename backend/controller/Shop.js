@@ -5,7 +5,7 @@ const { upload } = require("../multer");
 const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/sendMail");
 const Shop = require("../model/shop");
-const { isSeller } = require("../middleware/auth");
+const { isAuthenticated, isSeller, isAdmin } = require("../middleware/auth");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ErrorHandler = require("../utils/ErrorHandler");
 const sendShopToken = require("../utils/shopToken");
@@ -26,7 +26,7 @@ router.post("/create-shop", upload.single("file"), async (req, res, next) => {
           res.status(500).json({ message: "Error deleting file" });
         }
       });
-      return next(new ErrorHandler("User already exists", 400));
+      return next(new ErrorHandler("Seller already exists", 400));
     }
 
     const filename = req.file.filename;
@@ -126,7 +126,7 @@ router.post(
       const user = await Shop.findOne({ email }).select("+password");
 
       if (!user) {
-        return next(new ErrorHandler("User doesn't exists!", 400));
+        return next(new ErrorHandler("Seller doesn't exists!", 400));
       }
 
       const isPasswordValid = await user.comparePassword(password);
@@ -308,6 +308,64 @@ router.delete(
       res.status(201).json({
         success: true,
         seller,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
+
+
+// all sellers --- for admin
+router.get(
+  "/admin-all-sellers",
+ isAuthenticated,
+isAdmin("Admin"),
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const sellers = await Shop.find().sort({
+        createdAt: -1,
+      });
+      res.status(201).json({
+        success: true,
+        sellers,
+      });
+    } catch (error) {
+      return next(new ErrorHandler(error.message, 500));
+    }
+  })
+);
+
+// delete seller ---admin
+router.delete(
+  "/delete-seller/:id",
+  isAuthenticated,
+  isAdmin("Admin"),
+  catchAsyncErrors(async (req, res, next) => {
+    try {
+      const seller = await Shop.findById(req.params.id);
+
+      if (!seller) {
+        return next(
+          new ErrorHandler("Seller is not available with this id", 400)
+        );
+      }
+
+      const filename =  seller.avatar;
+      const filePath =  `uploads/${filename}`;
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          console.log(err);
+          res.status(500).json({ message: "Error deleting avatar" });
+        }
+      });
+
+
+      await Shop.findByIdAndDelete(req.params.id);
+
+      res.status(201).json({
+        success: true,
+        message: "Seller deleted successfully!",
       });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));

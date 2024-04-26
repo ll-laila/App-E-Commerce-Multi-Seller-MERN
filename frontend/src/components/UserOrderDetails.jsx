@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BsFillBagFill } from "react-icons/bs";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams , useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../styles/styles";
 import { getAllOrdersOfUser } from "../redux/actions/order";
@@ -12,7 +12,9 @@ import {backend_url} from "../server";
 
 const UserOrderDetails = () => {
   const { orders } = useSelector((state) => state.order);
-  const { user } = useSelector((state) => state.user);
+  const { user, isAuthenticated } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [comment, setComment] = useState("");
@@ -24,6 +26,7 @@ const UserOrderDetails = () => {
   useEffect(() => {
     dispatch(getAllOrdersOfUser(user._id));
   }, [dispatch,user._id]);
+
 
   const data = orders && orders.find((item) => item._id === id);
 
@@ -62,6 +65,10 @@ const UserOrderDetails = () => {
       alert(error.response.data.message);
     })
   };
+
+
+
+
 
   return (
     <div className={`py-4 min-h-screen ${styles.section}`}>

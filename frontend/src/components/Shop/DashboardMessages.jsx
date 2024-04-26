@@ -377,12 +377,15 @@ const SellerInbox = ({
                     alt=""
                   />
                 )}
-                {/*item.images && (
+                
+                {/*item.images !== "" && item.images && (
                   <img
-                    src=""
+                    src={`${backend_url}/${userData?.avatar}`}
                     className="w-[300px] h-[300px] object-cover rounded-[10px] mr-2"
+                    alt=""
                   />
                 )*/}
+               
                 {item.text !== "" && (
                   <div>
                     <div

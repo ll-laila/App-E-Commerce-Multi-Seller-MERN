@@ -16,7 +16,7 @@ export const wishlistReducer = createReducer(initialState, (builder) => {
           i._id === isItemExist._id ? item : i
         );
       } else {
-        state.wishlist.push(item);
+                state.wishlist.push(item);
       }
     })
     .addCase("removeFromWishlist", (state, action) => {

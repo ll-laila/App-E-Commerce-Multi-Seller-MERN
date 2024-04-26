@@ -210,7 +210,7 @@ router.put(
   })
 );
 
-/*
+
 // all orders --- for admin
 router.get(
   "/admin-all-orders",
@@ -233,6 +233,7 @@ router.get(
 
 );
 
-  */
+  
+
 
 module.exports = router;

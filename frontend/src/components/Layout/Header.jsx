@@ -69,12 +69,11 @@ const Header = ({ activeHeading }) => {
       <div className={`${styles.section}`}>
         <div className="hidden 800px:h-[50px] 800px:my-[20px] 800px:flex items-center justify-between">
           <div>
-            <Link to="/">
-              <img
-                src="https://shopo.quomodothemes.website/assets/images/logo.svg"
-                alt=""
-              />
+            <Link to="/" >
+               <img className="absolute top-4 left-38" width="56" height="56" src="https://img.icons8.com/external-jumpicon-line-gradient-ayub-irawan/32/external-E-commerce-digital-marketing-jumpicon-(line-gradient)-jumpicon-line-gradient-ayub-irawan.png" alt="external-E-commerce-digital-marketing-jumpicon-(line-gradient)-jumpicon-line-gradient-ayub-irawan"/>
+                <button className="pl-14 text-[#9e1ad75f] text-2xl font-[800]  ">E-Shop</button>
             </Link>
+            
           </div>
           {/* search box */}
           <div className="w-[50%] relative">
@@ -83,7 +82,7 @@ const Header = ({ activeHeading }) => {
               placeholder="Search Product..."
               value={searchTerm}
               onChange={handleSearchChange}
-              className="h-[40px] w-full px-2 border-[#3957db] border-[2px] rounded-md"
+              className="h-[40px] w-full px-2 border-indigo-500 border-[2px] rounded-md"
             />
             <AiOutlineSearch
               size={30}
@@ -107,30 +106,33 @@ const Header = ({ activeHeading }) => {
               </div>
             ) : null}
           </div>
-          <div className={`${styles.button}`}>
+          <div className="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-gray-50 rounded-xl flex items-center gap-2">
             <Link to={`${isSeller ? "/dashboard" : "/shop-create"}`}>
               <h1 className="text-[#fff] flex items-center">
-                {isSeller ? "Go Dashboard" : "Become Seller"}{" "}
-                <IoIosArrowForward className="ml-1" />
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg> 
+                <span>{isSeller ? "  Go Dashboard" : "  Become Seller"}{" "}</span>
               </h1>
             </Link>
           </div>
+          
         </div>
       </div>
       <div
         className={`${
           active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
-        } transition hidden 800px:flex items-center justify-between w-full bg-[#3321c8] h-[70px]`}
+        } transition hidden 800px:flex items-center justify-between w-full bg-[#9e99d463] h-[70px]`}
       >
         <div
           className={`${styles.section} relative ${styles.noramlFlex} justify-between`}
         >
           {/* categories */}
           <div onClick={() => setDropDown(!dropDown)}>
-            <div className="relative h-[60px] mt-[10px] w-[270px] hidden 1000px:block">
-              <BiMenuAltLeft size={30} className="absolute top-3 left-2" />
+            <div className="relative h-[70px]  w-[270px] hidden 1000px:block">
+              <BiMenuAltLeft size={40} className="absolute top-3 left-2" />
               <button
-                className={`h-[100%] w-full flex justify-between items-center pl-10 bg-white font-sans text-lg font-[500] select-none rounded-t-md`}
+                className={`h-[100%] w-full flex justify-between items-center pl-20 hover:text-indigo-400 bg-[#c7c3f363] font-sans text-lg font-[500] select-none `}
               >
                 All Categories
               </button>
@@ -160,7 +162,7 @@ const Header = ({ activeHeading }) => {
                 onClick={() => setOpenWishlist(true)}
               >
                 <AiOutlineHeart size={30} color="rgb(255 255 255 / 83%)" />
-                <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+                <span className="absolute right-0 top-0 rounded-full bg-indigo-500 w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
                  { wishlist && wishlist.length}
                 </span>
               </div>
@@ -175,7 +177,7 @@ const Header = ({ activeHeading }) => {
                   size={30}
                   color="rgb(255 255 255 / 83%)"
                 />
-                <span className="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
+                <span className="absolute right-0 top-0 rounded-full  bg-indigo-500 w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
                 {cart && cart.length}
                 </span>
               </div>

@@ -2,13 +2,13 @@ const Shop = require("../model/shop");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const express = require("express");
-//const { isSeller, isAuthenticated, isAdmin } = require("../middleware/auth");
+const { isSeller, isAuthenticated, isAdmin } = require("../middleware/auth");
 const Withdraw = require("../model/withdraw");
 const sendMail = require("../utils/sendMail");
 const router = express.Router();
 
 
-/*
+
 // create withdraw request --- only for seller
 router.post(
   "/create-withdraw-request",
@@ -62,7 +62,6 @@ router.get(
   catchAsyncErrors(async (req, res, next) => {
     try {
       const withdraws = await Withdraw.find().sort({ createdAt: -1 });
-
       res.status(201).json({
         success: true,
         withdraws,
@@ -122,5 +121,5 @@ router.put(
     }
   })
 );
-*/
+
 module.exports = router;
