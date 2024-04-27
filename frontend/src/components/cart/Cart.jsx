@@ -8,8 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addTocart, removeFromCart } from "../../redux/actions/cart";
 import { backend_url } from "../../server";
 
-
-
 const Cart = ({ setOpenCart }) => {
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -39,7 +37,7 @@ const Cart = ({ setOpenCart }) => {
                 onClick={() => setOpenCart(false)}
               />
             </div>
-            <h5>Cart Items is empty!</h5>
+            <h5>Le panier est vide !</h5>
           </div>
         ) : (
           <>
@@ -55,7 +53,7 @@ const Cart = ({ setOpenCart }) => {
               <div className={`${styles.noramlFlex} p-4`}>
                 <IoBagHandleOutline size={25} />
                 <h5 className="pl-2 text-[20px] font-[500]">
-                  {cart && cart.length} items
+                  {cart && cart.length} articles
                 </h5>
               </div>
 
@@ -81,7 +79,7 @@ const Cart = ({ setOpenCart }) => {
                   className={`h-[45px] flex items-center justify-center w-[100%] bg-[#e44343] rounded-[5px]`}
                 >
                   <h1 className="text-[#fff] text-[18px] font-[600]">
-                    Checkout Now (USD${totalPrice})
+                    Passer à la caisse ({totalPrice} MAD)
                   </h1>
                 </div>
               </Link>
@@ -99,7 +97,7 @@ const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
 
   const increment = (data) => {
     if (data.stock < value) {
-      alert("Product stock limited!");
+      alert("Stock de produits limité !");
     } else {
       setValue(value + 1);
       const updateCartData = { ...data, qty: value + 1 };
@@ -139,16 +137,18 @@ const CartSingle = ({ data, quantityChangeHandler, removeFromCartHandler }) => {
         <div className="pl-[5px]">
           <h1>{data.name}</h1>
           <h4 className="font-[400] text-[15px] text-[#00000082]">
-            ${data.discountPrice} * {value}
+            {data.discountPrice} * {value} MAD
           </h4>
           <h4 className="font-[600] text-[17px] pt-[3px] text-[#d02222] font-Roboto">
-            US${totalPrice}
+            {totalPrice} MAD
           </h4>
         </div>
-        <RxCross1
-          className="cursor-pointer"
-          onClick={() => removeFromCartHandler(data)}
-        />
+        <div className="pl-6">
+          <RxCross1
+            className="cursor-pointer "
+            onClick={() => removeFromCartHandler(data)}
+          />
+        </div>
       </div>
     </div>
   );

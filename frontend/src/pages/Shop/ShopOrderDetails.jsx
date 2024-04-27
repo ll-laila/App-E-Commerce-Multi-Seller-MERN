@@ -8,7 +8,6 @@ const ShopOrderDetails = () => {
     <div>
          <DashboardHeader />
          <OrderDetails />
-         <Footer />
     </div>
   )
 }

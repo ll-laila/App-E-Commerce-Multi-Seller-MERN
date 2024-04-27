@@ -89,7 +89,7 @@ const ProfileContent = ({ active }) => {
             <div className="relative">
               <img
                 src={`${backend_url}${user?.avatar}`}
-                className="w-[150px] h-[150px] rounded-full object-cover border-[3px] border-[#3ad132]"
+                className="w-[150px] h-[150px] rounded-full object-cover border-[3px] border-[#dea23b] "
                 alt=""
               />
               <div className="w-[30px] h-[30px] bg-[#E3E9EE] rounded-full flex items-center justify-center cursor-pointer absolute bottom-[5px] right-[5px]">
@@ -111,7 +111,7 @@ const ProfileContent = ({ active }) => {
             <form onSubmit={handleSubmit} aria-required={true}>
               <div className="w-full 800px:flex block pb-3">
                 <div className=" w-[100%] 800px:w-[50%]">
-                  <label className="block pb-2">Full Name</label>
+                  <label className="block pb-2">Nom complet</label>
                   <input
                     type="text"
                     className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
@@ -121,7 +121,7 @@ const ProfileContent = ({ active }) => {
                   />
                 </div>
                 <div className=" w-[100%] 800px:w-[50%]">
-                  <label className="block pb-2">Email Address</label>
+                  <label className="block pb-2">Email </label>
                   <input
                     type="text"
                     className={`${styles.input} !w-[95%] mb-1 800px:mb-0`}
@@ -133,7 +133,7 @@ const ProfileContent = ({ active }) => {
               </div>           
               <div className="w-full 800px:flex block pb-3">
                 <div className=" w-[100%] 800px:w-[50%]">
-                  <label className="block pb-2">Phone Number</label>
+                  <label className="block pb-2">Numéro de téléphone</label>
                   <input
                     type="number"
                     className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
@@ -143,7 +143,7 @@ const ProfileContent = ({ active }) => {
                   />
                 </div>
                 <div className=" w-[100%] 800px:w-[50%]">
-                  <label className="block pb-2">Enter your password</label>
+                  <label className="block pb-2">Mot de passe</label>
                   <input
                     type="password"
                     className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
@@ -156,7 +156,7 @@ const ProfileContent = ({ active }) => {
               <input
                 className={`w-[250px] h-[40px] border border-[#3a24db] text-center text-[#3a24db] rounded-[3px] mt-8 cursor-pointer`}
                 required
-                value="Update"
+                value="Modifier"
                 type="submit"
               />
             </form>
@@ -222,11 +222,11 @@ const AllOrders = () => {
   }, []);
 
   const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
+    { field: "id", headerName: "Numéro du Commande", minWidth: 150, flex: 0.7 },
 
     {
       field: "status",
-      headerName: "Status",
+      headerName: "Statut",
       minWidth: 130,
       flex: 0.7,
       cellClassName: (params) => {
@@ -237,7 +237,7 @@ const AllOrders = () => {
     },
     {
       field: "itemsQty",
-      headerName: "Items Qty",
+      headerName: "Quantité d'articles",
       type: "number",
       minWidth: 130,
       flex: 0.7,
@@ -279,7 +279,7 @@ const AllOrders = () => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
-        total: "US$ " + item.totalPrice,
+        total:  item.totalPrice + " MAD",
         status: item.status,
       });
     });
@@ -289,7 +289,7 @@ const AllOrders = () => {
       <DataGrid
         rows={row}
         columns={columns}
-        pageSize={10}
+        pageSize={8}
         disableSelectionOnClick
         autoHeight
       />
@@ -310,11 +310,11 @@ const AllRefundOrders = () => {
     orders && orders.filter((item) => item.status === "Processing refund");
 
   const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
+    { field: "id", headerName: "Numéro du Commande", minWidth: 150, flex: 0.7 },
 
     {
       field: "status",
-      headerName: "Status",
+      headerName: "Statut",
       minWidth: 130,
       flex: 0.7,
       cellClassName: (params) => {
@@ -325,7 +325,7 @@ const AllRefundOrders = () => {
     },
     {
       field: "itemsQty",
-      headerName: "Items Qty",
+      headerName: "Quantité d'articles",
       type: "number",
       minWidth: 130,
       flex: 0.7,
@@ -367,7 +367,7 @@ const AllRefundOrders = () => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
-        total: "US$ " + item.totalPrice,
+        total:  item.totalPrice +" MAD",
         status: item.status,
       });
     });
@@ -377,7 +377,7 @@ const AllRefundOrders = () => {
       <DataGrid
         rows={row}
         columns={columns}
-        pageSize={10}
+        pageSize={8}
         autoHeight
         disableSelectionOnClick
       />
@@ -395,11 +395,11 @@ const TrackOrder = () => {
   }, []);
 
   const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
+    { field: "id", headerName: "Numéro du Commande", minWidth: 150, flex: 0.7 },
 
     {
       field: "status",
-      headerName: "Status",
+      headerName: "Statut",
       minWidth: 130,
       flex: 0.7,
       cellClassName: (params) => {
@@ -410,7 +410,7 @@ const TrackOrder = () => {
     },
     {
       field: "itemsQty",
-      headerName: "Items Qty",
+      headerName: "Numéro du Commande",
       type: "number",
       minWidth: 130,
       flex: 0.7,
@@ -452,7 +452,7 @@ const TrackOrder = () => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
-        total: "US$ " + item.totalPrice,
+        total:  item.totalPrice + " MAD ",
         status: item.status,
       });
     });
@@ -462,7 +462,7 @@ const TrackOrder = () => {
       <DataGrid
         rows={row}
         columns={columns}
-        pageSize={10}
+        pageSize={8}
         disableSelectionOnClick
         autoHeight
       />
@@ -506,7 +506,7 @@ const ChangePassword = () => {
           className="flex flex-col items-center"
         >
           <div className=" w-[100%] 800px:w-[50%] mt-5">
-            <label className="block pb-2">Enter your old password</label>
+            <label className="block pb-2">Entrez votre ancien mot de passe</label>
             <input
               type="password"
               className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
@@ -516,7 +516,7 @@ const ChangePassword = () => {
             />
           </div>
           <div className=" w-[100%] 800px:w-[50%] mt-2">
-            <label className="block pb-2">Enter your new password</label>
+            <label className="block pb-2">Entrez votre nouveau mot de passe</label>
             <input
               type="password"
               className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
@@ -526,7 +526,7 @@ const ChangePassword = () => {
             />
           </div>
           <div className=" w-[100%] 800px:w-[50%] mt-2">
-            <label className="block pb-2">Enter your confirm password</label>
+            <label className="block pb-2">Entrez votre mot de passe de confirmation</label>
             <input
               type="password"
               className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
@@ -537,7 +537,7 @@ const ChangePassword = () => {
             <input
               className={`w-[95%] h-[40px] border border-[#3a24db] text-center text-[#3a24db] rounded-[3px] mt-8 cursor-pointer`}
               required
-              value="Update"
+              value="Enregistrer"
               type="submit"
             />
           </div>
@@ -560,13 +560,13 @@ const Address = () => {
 
   const addressTypeData = [
     {
-      name: "Default",
+      name: "Défaut",
     },
     {
-      name: "Home",
+      name: "Maison",
     },
     {
-      name: "Office",
+      name: "Bureau",
     },
   ];
 
@@ -574,7 +574,7 @@ const Address = () => {
     e.preventDefault();
 
     if (addressType === "" || country === "" || city === "") {
-      alert("Please fill all the fields!");
+      alert("Veuillez remplir tous les champs !");
     } else {
       dispatch(
         updatUserAddress(
@@ -614,13 +614,13 @@ const Address = () => {
               />
             </div>
             <h1 className="text-center text-[25px] font-Poppins">
-              Add New Address
+            Ajouter une nouvelle adresse
             </h1>
             <div className="w-full">
               <form aria-required onSubmit={handleSubmit} className="w-full">
                 <div className="w-full block p-4">
                   <div className="w-full pb-2">
-                    <label className="block pb-2">Country</label>
+                    <label className="block pb-2">Pays</label>
                     <select
                       name=""
                       id=""
@@ -629,7 +629,7 @@ const Address = () => {
                       className="w-[95%] border h-[40px] rounded-[5px]"
                     >
                       <option value="" className="block border pb-2">
-                        choose your country
+                      Choisissez votre pays
                       </option>
                       {Country &&
                         Country.getAllCountries().map((item) => (
@@ -645,7 +645,7 @@ const Address = () => {
                   </div>
 
                   <div className="w-full pb-2">
-                    <label className="block pb-2">Choose your City</label>
+                    <label className="block pb-2">Choisissez votre ville</label>
                     <select
                       name=""
                       id=""
@@ -654,7 +654,7 @@ const Address = () => {
                       className="w-[95%] border h-[40px] rounded-[5px]"
                     >
                       <option value="" className="block border pb-2">
-                        choose your city
+                      choisissez votre ville
                       </option>
                       {State &&
                         State.getStatesOfCountry(country).map((item) => (
@@ -670,7 +670,7 @@ const Address = () => {
                   </div>
 
                   <div className="w-full pb-2">
-                    <label className="block pb-2">Address 1</label>
+                    <label className="block pb-2">Adresse 1</label>
                     <input
                       type="address"
                       className={`${styles.input}`}
@@ -680,7 +680,7 @@ const Address = () => {
                     />
                   </div>
                   <div className="w-full pb-2">
-                    <label className="block pb-2">Address 2</label>
+                    <label className="block pb-2">Adresse 2</label>
                     <input
                       type="address"
                       className={`${styles.input}`}
@@ -691,7 +691,7 @@ const Address = () => {
                   </div>
 
                   <div className="w-full pb-2">
-                    <label className="block pb-2">Zip Code</label>
+                    <label className="block pb-2">Code Postale</label>
                     <input
                       type="number"
                       className={`${styles.input}`}
@@ -702,7 +702,7 @@ const Address = () => {
                   </div>
 
                   <div className="w-full pb-2">
-                    <label className="block pb-2">Address Type</label>
+                    <label className="block pb-2">Type d'adresse</label>
                     <select
                       name=""
                       id=""
@@ -711,7 +711,7 @@ const Address = () => {
                       className="w-[95%] border h-[40px] rounded-[5px]"
                     >
                       <option value="" className="block border pb-2">
-                        Choose your Address Type
+                      Choisissez votre type d'adresse
                       </option>
                       {addressTypeData &&
                         addressTypeData.map((item) => (
@@ -742,13 +742,13 @@ const Address = () => {
       )}
       <div className="flex w-full items-center justify-between">
         <h1 className="text-[25px] font-[600] text-[#000000ba] pb-2">
-          My Addresses
+        Mes adresses
         </h1>
         <div
-          className={`${styles.button} !rounded-md`}
+          className={`${styles.button} !rounded-md bg-[#dea23b]`}
           onClick={() => setOpen(true)}
         >
-          <span className="text-[#fff]">Add New</span>
+          <span className="text-[#fff] font-[400] text-[20px]">Ajouter</span>
         </div>
       </div>
       <br />
@@ -783,7 +783,7 @@ const Address = () => {
 
       {user && user.addresses.length === 0 && (
         <h5 className="text-center pt-8 text-[18px]">
-          You not have any saved address!
+        Vous n'avez aucune adresse enregistrée !
         </h5>
       )}
     </div>

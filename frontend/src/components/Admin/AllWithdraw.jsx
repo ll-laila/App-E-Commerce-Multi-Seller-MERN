@@ -28,42 +28,42 @@ const AllWithdraw = () => {
   }, []);
 
   const columns = [
-    { field: "id", headerName: "Withdraw Id", minWidth: 150, flex: 0.7 },
+    { field: "id", headerName: "Numéro", minWidth: 150, flex: 0.7 },
     {
       field: "name",
-      headerName: "Shop Name",
-      minWidth: 180,
+      headerName: "Nom de la boutique",
+      minWidth: 90,
       flex: 1.4,
     },
     {
       field: "shopId",
-      headerName: "Shop Id",
-      minWidth: 180,
+      headerName: "Numéro de la boutique ",
+      minWidth: 90,
       flex: 1.4,
     },
     {
       field: "amount",
-      headerName: "Amount",
+      headerName: "Montant",
       minWidth: 100,
       flex: 0.6,
     },
     {
       field: "status",
-      headerName: "status",
+      headerName: "Statut",
       type: "text",
       minWidth: 80,
       flex: 0.5,
     },
     {
       field: "createdAt",
-      headerName: "Request given at",
+      headerName: "Demande faite à",
       type: "number",
       minWidth: 130,
       flex: 0.6,
     },
     {
       field: " ",
-      headerName: "Update Status",
+      headerName: "État de mise à jour",
       type: "number",
       minWidth: 130,
       flex: 0.6,
@@ -86,7 +86,7 @@ const AllWithdraw = () => {
         sellerId: withdrawData.shopId,
       },{withCredentials: true})
       .then((res) => {
-        toast.success("Withdraw request updated successfully!");
+        alert("Demande de retrait mise à jour avec succès !");
         setData(res.data.withdraws);
         setOpen(false);
       });
@@ -100,14 +100,14 @@ const AllWithdraw = () => {
         id: item._id,
         shopId: item.seller._id,
         name: item.seller.name,
-        amount: "US$ " + item.amount,
+        amount: item.amount + " MAD ",
         status: item.status,
         createdAt: item.createdAt.slice(0, 10),
       });
     });
   return (
     <div className="w-full flex items-center pt-5 justify-center">
-      <div className="w-[95%] bg-white">
+      <div className="w-[95%] bg-white shadow-lg">
         <DataGrid
           rows={row}
           columns={columns}
@@ -118,12 +118,12 @@ const AllWithdraw = () => {
       </div>
       {open && (
         <div className="w-full fixed h-screen top-0 left-0 bg-[#00000031] z-[9999] flex items-center justify-center">
-          <div className="w-[50%] min-h-[40vh] bg-white rounded shadow p-4">
+          <div className="w-[50%] min-h-[40vh] bg-white rounded shadow-lg p-4">
             <div className="flex justify-end w-full">
               <RxCross1 size={25} onClick={() => setOpen(false)} />
             </div>
             <h1 className="text-[25px] text-center font-Poppins">
-              Update Withdraw status
+            Mettre à jour le statut de retrait
             </h1>
             <br />
             <select
@@ -140,7 +140,7 @@ const AllWithdraw = () => {
               className={`block ${styles.button} text-white !h-[42px] mt-4 text-[18px]`}
               onClick={handleSubmit}
             >
-              Update
+              Modifier
             </button>
           </div>
         </div>

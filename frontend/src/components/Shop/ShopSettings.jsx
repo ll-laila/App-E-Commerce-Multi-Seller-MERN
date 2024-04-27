@@ -55,7 +55,7 @@ const ShopSettings = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        alert("Shop info updated succesfully!");
+        alert("Informations sur la boutique mises à jour avec succès !");
         dispatch(loadSeller());
       })
       .catch((error) => {
@@ -96,7 +96,7 @@ const ShopSettings = () => {
         >
           <div className="w-[100%] flex items-center flex-col 800px:w-[50%] mt-5">
             <div className="w-full pl-[3%]">
-              <label className="block pb-2">Shop Name</label>
+              <label className="block pb-2">Nom de la boutique</label>
             </div>
             <input
               type="name"
@@ -109,14 +109,14 @@ const ShopSettings = () => {
           </div>
           <div className="w-[100%] flex items-center flex-col 800px:w-[50%] mt-5">
             <div className="w-full pl-[3%]">
-              <label className="block pb-2">Shop description</label>
+              <label className="block pb-2">Description</label>
             </div>
             <input
               type="name"
               placeholder={`${
                 seller?.description
                   ? seller.description
-                  : "Enter your shop description"
+                  : "Entrer votre  description"
               }`}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -139,7 +139,7 @@ const ShopSettings = () => {
 
           <div className="w-[100%] flex items-center flex-col 800px:w-[50%] mt-5">
             <div className="w-full pl-[3%]">
-              <label className="block pb-2">Shop Phone Number</label>
+              <label className="block pb-2">Numéro de téléphone</label>
             </div>
             <input
               type="number"
@@ -153,7 +153,7 @@ const ShopSettings = () => {
 
           <div className="w-[100%] flex items-center flex-col 800px:w-[50%] mt-5">
             <div className="w-full pl-[3%]">
-              <label className="block pb-2">Shop Zip Code</label>
+              <label className="block pb-2">Code postale</label>
             </div>
             <input
               type="number"
@@ -168,7 +168,7 @@ const ShopSettings = () => {
           <div className="w-[100%] flex items-center flex-col 800px:w-[50%] mt-5">
             <input
               type="submit"
-              value="Update Shop"
+              value="Enregistrer"
               className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
               required
               readOnly

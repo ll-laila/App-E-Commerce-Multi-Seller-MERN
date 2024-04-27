@@ -29,7 +29,7 @@ const AdminDashboardMain = () => {
    const adminBalance = adminEarning?.toFixed(2);
 
   const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
+    { field: "id", headerName: "Numero du commande", minWidth: 130, flex: 0.750, flex: 0.7 },
 
     {
       field: "status",
@@ -44,7 +44,7 @@ const AdminDashboardMain = () => {
     },
     {
       field: "itemsQty",
-      headerName: "Items Qty",
+      headerName: "Quantité d'articles",
       type: "number",
       minWidth: 130,
       flex: 0.7,
@@ -59,7 +59,7 @@ const AdminDashboardMain = () => {
     },
     {
       field: "createdAt",
-      headerName: "Order Date",
+      headerName: "Date de commande",
       type: "number",
       minWidth: 130,
       flex: 0.8,
@@ -72,7 +72,7 @@ const AdminDashboardMain = () => {
       row.push({
         id: item._id,
         itemsQty: item?.cart?.reduce((acc, item) => acc + item.qty, 0),
-        total: item?.totalPrice + " $",
+        total: item?.totalPrice + " MAD",
         status: item?.status,
         createdAt: item?.createdAt.slice(0,10),
       });
@@ -85,9 +85,9 @@ const AdminDashboardMain = () => {
         <Loader />
       ) : (
         <div className="w-full p-4">
-        <h3 className="text-[22px] font-Poppins pb-2">Overview</h3>
+        <h3 className="text-[22px] font-Poppins pb-2">Aperçu</h3>
         <div className="w-full block 800px:flex items-center justify-between">
-          <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow rounded px-2 py-5">
+          <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow-lg rounded px-2 py-5">
             <div className="flex items-center">
               <AiOutlineMoneyCollect
                 size={30}
@@ -97,28 +97,28 @@ const AdminDashboardMain = () => {
               <h3
                 className={`${styles.productTitle} !text-[18px] leading-5 !font-[400] text-[#00000085]`}
               >
-                Total Earning
+                Gain total
               </h3>
             </div>
-            <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">$ {adminBalance}</h5>
+            <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">{adminBalance} MAD</h5>
           </div>
   
-          <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow rounded px-2 py-5">
+          <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow-lg rounded px-2 py-5">
             <div className="flex items-center">
               <MdBorderClear size={30} className="mr-2" fill="#00000085" />
               <h3
                 className={`${styles.productTitle} !text-[18px] leading-5 !font-[400] text-[#00000085]`}
               >
-                All Sellers
+               Tous les vendeurs
               </h3>
             </div>
             <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">{sellers && sellers.length}</h5>
             <Link to="/admin-sellers">
-              <h5 className="pt-4 pl-2 text-[#077f9c]">View Sellers</h5>
+              <h5 className="pt-4 pl-2 text-[#077f9c]">Voir les vendeurs</h5>
             </Link>
           </div>
   
-          <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow rounded px-2 py-5">
+          <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow-lg rounded px-2 py-5">
             <div className="flex items-center">
               <AiOutlineMoneyCollect
                 size={30}
@@ -128,18 +128,18 @@ const AdminDashboardMain = () => {
               <h3
                 className={`${styles.productTitle} !text-[18px] leading-5 !font-[400] text-[#00000085]`}
               >
-                All Orders
+                Tous les Commandes
               </h3>
             </div>
             <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">{adminOrders && adminOrders.length}</h5>
             <Link to="/admin-orders">
-              <h5 className="pt-4 pl-2 text-[#077f9c]">View Orders</h5>
+              <h5 className="pt-4 pl-2 text-[#077f9c]">Voir les Commandes</h5>
             </Link>
           </div>
         </div>
   
         <br />
-        <h3 className="text-[22px] font-Poppins pb-2">Latest Orders</h3>
+        <h3 className="text-[22px] font-Poppins pb-2 shadow-lg">Dernières commandes</h3>
         <div className="w-full min-h-[45vh] bg-white rounded">
           <DataGrid
             rows={row}

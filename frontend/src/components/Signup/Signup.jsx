@@ -46,7 +46,7 @@ const Singup = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Register as a new user
+          Inscrivez-vous en tant que nouvel utilisateur
         </h2>
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -57,7 +57,7 @@ const Singup = () => {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-                Full Name
+                Nom Complet
               </label>
               <div className="mt-1">
                 <input
@@ -77,7 +77,7 @@ const Singup = () => {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-                Email address
+                Email 
               </label>
               <div className="mt-1">
                 <input
@@ -97,7 +97,7 @@ const Singup = () => {
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700"
               >
-                Password
+                Mot de passe
               </label>
               <div className="mt-1 relative">
                 <input
@@ -146,7 +146,7 @@ const Singup = () => {
                   htmlFor="file-input"
                   className="ml-5 flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
                 >
-                  <span>Upload a file</span>
+                  <span>Télécharger un fichier</span>
                   <input
                     type="file"
                     name="avatar"
@@ -164,13 +164,13 @@ const Singup = () => {
                 type="submit"
                 className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
               >
-                Submit
+                Soumettre
               </button>
             </div>
             <div className={`${styles.noramlFlex} w-full`}>
-              <h4>Already have an account?</h4>
+              <h4>Vous avez déjà un compte ?</h4>
               <Link to="/login" className="text-blue-600 pl-2">
-                Sign In
+                Se connecter
               </Link>
             </div>
           </form>

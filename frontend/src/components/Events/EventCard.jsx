@@ -21,16 +21,16 @@ const EventCard = ({active,data}) => {
       } else {
         const cartData = { ...data, qty: 1 };
         dispatch(addTocart(cartData));
-        alert("Item added to cart successfully!");
+        alert("Article ajouté au panier avec succès!");
       }
     }
   }
 
   return (
     <div
-      className={`w-full block bg-white rounded-lg ${
+      className={`w-full block bg-white rounded-lg shadow-lg ${
         active ? "unset" : "mb-12"
-        } lg:flex p-2`}
+        } lg:flex p-2`} 
       >
       <div className="w-full lg:-w[40%] m-auto">
         <img
@@ -44,23 +44,24 @@ const EventCard = ({active,data}) => {
         <div className="flex py-2 justify-between">
           <div className="flex">
             <h5 className="font-[500] text-[18px] text-[#d55b45] pr-3 line-through">
-              {data.originalPrice} $
+              {data.originalPrice} MAD
             </h5>
             <h5 className="font-bold text-[20px] text-[#333] font-Roboto">
-            {data.discountPrice} $
+            {data.discountPrice} MAD
             </h5>
           </div>
           <span className="pr-3 font-[400] text-[17px] text-[#44a55e]">
-           {data.sold_out} sold
+           {data.sold_out} vendu
+
           </span>
         </div>
         <CountDown data={data}/>
         <br />
         <div className="flex items-center">
         <Link to={`/product/${data._id}?isEvent=true`}>
-            <div className={`${styles.button} text-[#fff]`}>See Details</div>
+            <div className={`${styles.button} text-[#fff]`}>Voir les détails</div>
           </Link>
-          <div className={`${styles.button} text-[#fff] ml-5`} onClick={() => addToCartHandler(data)}>Add to cart</div>
+          <div className={`${styles.button} text-[#fff] ml-5`} onClick={() => addToCartHandler(data)}>Ajouter au panier</div>
         </div>
       </div>
     </div>

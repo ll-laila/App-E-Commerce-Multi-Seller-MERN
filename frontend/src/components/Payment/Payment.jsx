@@ -35,7 +35,7 @@ const Payment = () => {
           {
             description: "Sunflower",
             amount: {
-              currency_code: "USD",
+              currency_code: "MAD",
               value: orderData?.totalPrice,
             },
           },
@@ -82,7 +82,6 @@ const Payment = () => {
       .then((res) => {
         setOpen(false);
         navigate("/order/success");
-        alert("Order successful!");
         localStorage.setItem("cartItems", JSON.stringify([]));
         localStorage.setItem("latestOrder", JSON.stringify([]));
         window.location.reload();
@@ -139,7 +138,6 @@ const Payment = () => {
             .then((res) => {
               setOpen(false);
               navigate("/order/success");
-              alert("Order successful!");
               localStorage.setItem("cartItems", JSON.stringify([]));
               localStorage.setItem("latestOrder", JSON.stringify([]));
               window.location.reload();
@@ -169,7 +167,6 @@ const Payment = () => {
     .then((res) => {
       setOpen(false);
       navigate("/order/success");
-      alert("Order successful!");
       localStorage.setItem("cartItems", JSON.stringify([]));
       localStorage.setItem("latestOrder", JSON.stringify([]));
       window.location.reload();
@@ -223,7 +220,7 @@ const PaymentInfo = ({
             ) : null}
           </div>
           <h4 className="text-[18px] pl-2 font-[600] text-[#000000b1]">
-            Pay with Debit/credit card
+          Payer par carte de débit/crédit
           </h4>
         </div>
 
@@ -233,7 +230,7 @@ const PaymentInfo = ({
             <form className="w-full" onSubmit={paymentHandler}>
               <div className="w-full flex pb-3">
                 <div className="w-[50%]">
-                  <label className="block pb-2">Name On Card</label>
+                  <label className="block pb-2">Nom sur la carte</label>
                   <input
                     required
                     placeholder={user && user.name}
@@ -242,7 +239,7 @@ const PaymentInfo = ({
                   />
                 </div>
                 <div className="w-[50%]">
-                  <label className="block pb-2">Exp Date</label>
+                  <label className="block pb-2">Date d'expiration</label>
                   <CardExpiryElement
                     className={`${styles.input}`}
                     options={{
@@ -267,7 +264,7 @@ const PaymentInfo = ({
 
               <div className="w-full flex pb-3">
                 <div className="w-[50%]">
-                  <label className="block pb-2">Card Number</label>
+                  <label className="block pb-2">Numéro de carte</label>
                   <CardNumberElement
                     className={`${styles.input} !h-[35px] !w-[95%]`}
                     options={{
@@ -313,7 +310,7 @@ const PaymentInfo = ({
               </div>
               <input
                 type="submit"
-                value="Submit"
+                value="Soumettre"
                 className={`${styles.button} !bg-[#f63b60] text-[#fff] h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
               />
             </form>
@@ -334,7 +331,7 @@ const PaymentInfo = ({
             ) : null}
           </div>
           <h4 className="text-[18px] pl-2 font-[600] text-[#000000b1]">
-            Pay with Paypal
+             Payer avec PayPal
           </h4>
         </div>
 
@@ -345,7 +342,7 @@ const PaymentInfo = ({
               className={`${styles.button} !bg-[#f63b60] text-white h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
               onClick={() => setOpen(true)}
             >
-              Pay Now
+            Payer
             </div>
             {open && (
               <div className="w-full fixed top-0 left-0 bg-[#00000039] h-screen flex items-center justify-center z-[99999]">
@@ -389,7 +386,7 @@ const PaymentInfo = ({
             ) : null}
           </div>
           <h4 className="text-[18px] pl-2 font-[600] text-[#000000b1]">
-            Cash on Delivery
+          Paiement à la livraison
           </h4>
         </div>
 
@@ -399,7 +396,7 @@ const PaymentInfo = ({
             <form className="w-full" onSubmit={cashOnDeliveryHandler}>
               <input
                 type="submit"
-                value="Confirm"
+                value="Confirmer"
                 className={`${styles.button} !bg-[#f63b60] text-[#fff] h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
               />
             </form>
@@ -416,18 +413,18 @@ const CartData = ({orderData}) => {
   return (
     <div className="w-full bg-[#fff] rounded-md p-5 pb-8">
       <div className="flex justify-between">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">subtotal:</h3>
+        <h3 className="text-[16px] font-[400] text-[#000000a4]">Total partiel:</h3>
         <h5 className="text-[18px] font-[600]">${orderData?.subTotalPrice}</h5>
       </div>
       <br />
       <div className="flex justify-between">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">shipping:</h3>
+        <h3 className="text-[16px] font-[400] text-[#000000a4]">expédition:</h3>
         <h5 className="text-[18px] font-[600]">${shipping}</h5>
       </div>
       <br />
       <div className="flex justify-between border-b pb-3">
-        <h3 className="text-[16px] font-[400] text-[#000000a4]">Discount:</h3>
-        <h5 className="text-[18px] font-[600]">{orderData?.discountPrice? "$" + orderData.discountPrice : "-"}</h5>
+        <h3 className="text-[16px] font-[400] text-[#000000a4]">Remise:</h3>
+        <h5 className="text-[18px] font-[600]">{orderData?.discountPrice? " MAD" + orderData.discountPrice : "-"}</h5>
       </div>
       <h5 className="text-[18px] font-[600] text-end pt-3">
         ${orderData?.totalPrice}

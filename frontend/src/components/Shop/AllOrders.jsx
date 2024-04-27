@@ -18,11 +18,11 @@ const AllOrders = () => {
   }, [dispatch]);
 
   const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
+    { field: "id", headerName: "Numéro du Commande", minWidth: 150, flex: 0.7 },
 
     {
       field: "status",
-      headerName: "Status",
+      headerName: "Statut",
       minWidth: 130,
       flex: 0.7,
       cellClassName: (params) => {
@@ -33,7 +33,7 @@ const AllOrders = () => {
     },
     {
       field: "itemsQty",
-      headerName: "Items Qty",
+      headerName: "Quantité du Produit",
       type: "number",
       minWidth: 130,
       flex: 0.7,
@@ -75,7 +75,7 @@ const AllOrders = () => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
-        total: "US$ " + item.totalPrice,
+        total:  item.totalPrice +" MAD",
         status: item.status,
       });
     });
@@ -85,7 +85,7 @@ const AllOrders = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="w-full mx-8 pt-1 mt-10 bg-white">
+        <div className="w-full mx-8 pt-1 mt-10 bg-white shadow-lg">
           <DataGrid
             rows={row}
             columns={columns}

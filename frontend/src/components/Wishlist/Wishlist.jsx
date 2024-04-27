@@ -34,7 +34,7 @@ const Wishlist = ({ setOpenWishlist }) => {
                 onClick={() => setOpenWishlist(false)}
               />
             </div>
-            <h5>Wishlist Items is empty!</h5>
+            <h5>La liste de souhaits est vide !</h5>
           </div>
         ) : (
           <>
@@ -50,13 +50,13 @@ const Wishlist = ({ setOpenWishlist }) => {
               <div className={`${styles.noramlFlex} p-4`}>
                 <AiOutlineHeart size={25} />
                 <h5 className="pl-2 text-[20px] font-[500]">
-                  {wishlist && wishlist.length} items
+                  {wishlist && wishlist.length} Articles
                 </h5>
               </div>
 
               {/* cart Single Items */}
               <br />
-              <div className="w-full border-t">
+              <div className="w-full border-t ">
                 {wishlist &&
                   wishlist.map((i, index) => (
                     <CartSingle key={index} data={i} removeFromWishlistHandler={removeFromWishlistHandler} addToCartHandler={addToCartHandler} />
@@ -89,11 +89,11 @@ const CartSingle = ({ data,removeFromWishlistHandler,addToCartHandler }) => {
         <div className="pl-[5px]">
           <h1>{data.name}</h1>
           <h4 className="font-[600] pt-3 800px:pt-[3px] text-[17px] text-[#d02222] font-Roboto">
-            US${totalPrice}
+            {totalPrice} MAD
           </h4>
         </div>
-        <div>
-          <BsCartPlus size={20} className="cursor-pointer" tile="Add to cart"
+        <div className="pl-6">
+          <BsCartPlus size={20} className="cursor-pointer " tile="Ajout au panier"
            onClick={() => addToCartHandler(data)}
           />
         </div>

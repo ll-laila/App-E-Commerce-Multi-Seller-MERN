@@ -21,6 +21,7 @@ import { addTocart } from "../../../redux/actions/cart";
 const ProductDetailsCard = ({ setOpen, data }) => {
 
   const { wishlist } = useSelector((state) => state.wishlist);
+  const { products } = useSelector((state) => state.products);
   const { cart } = useSelector((state) => state.cart);
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
@@ -43,14 +44,14 @@ const ProductDetailsCard = ({ setOpen, data }) => {
   const addToCartHandler = (id) => {
     const isItemExists = cart && cart.find((i) => i._id === id);
     if (isItemExists) {
-      alert("Item already in cart!");
+      alert("Article déjà dans le panier !");
     } else {
       if (data.stock < count) {
-        alert("Product stock limited!");
+        alert("Stock de produits limité !");
       } else {
         const cartData = { ...data, qty: count };
         dispatch(addTocart(cartData));
-        alert("Item added to cart successfully!");
+        alert("Article ajouté au panier avec succès !");
       }
     }
   };
@@ -73,6 +74,22 @@ const ProductDetailsCard = ({ setOpen, data }) => {
     setClick(!click);
     dispatch(addToWishlist(data));
   };
+
+  const totalReviewsLength =
+  products &&
+  products.reduce((acc, product) => acc + product.reviews.length, 0);
+
+  const totalRatings =
+    products &&
+    products.reduce(
+      (acc, product) =>
+        acc + product.reviews.reduce((sum, review) => sum + review.rating, 0),
+      0
+    );
+
+    const avg =  totalRatings / totalReviewsLength || 0;
+
+    const averageRating = avg.toFixed(2);
 
   return (
     <div className="bg-[#fff]">
@@ -99,7 +116,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                         {data.shop.name}
                       </h3>
                       <h5 className="pb-3 text-[15px]">
-                        ({/*data.shop.ratings*/}4) Ratings
+                        ({averageRating}/5) Évaluation
                       </h5>
                     </div>
                   </Link>
@@ -109,10 +126,10 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                   onClick={handleMessageSubmit}
                 >
                   <span className="text-[#fff] flex items-center">
-                    Send Message <AiOutlineMessage className="ml-1" />
+                   messagerie <AiOutlineMessage className="ml-1" />
                   </span>
                 </div>
-                <h5 className="text-[16px] text-[red] mt-5">({/*data.total_sell*/}50) Sold out</h5>
+                <h5 className="text-[16px] text-[red] mt-5">({data?.stock}) Stock</h5>
               </div>
 
               <div className="w-full 800px:w-[50%] pt-5 pl-[5px] pr-[5px]">
@@ -123,10 +140,10 @@ const ProductDetailsCard = ({ setOpen, data }) => {
 
                 <div className="flex pt-3">
                   <h4 className={`${styles.productDiscountPrice}`}>
-                    {data.discountPrice}$
+                    {data.discountPrice + " MAD"} 
                   </h4>
                   <h3 className={`${styles.price}`}>
-                    {data.originalPrice? data.originalPrice + "$" : null}
+                    {data.originalPrice? data.originalPrice + " MAD" : null}
                   </h3>
                 </div>
 
@@ -173,7 +190,7 @@ const ProductDetailsCard = ({ setOpen, data }) => {
                   onClick={() => addToCartHandler(data._id)}
                   >
                   <span className="text-[#fff] flex items-center">
-                    Add to cart <AiOutlineShoppingCart className="ml-1" />
+                    Ajout au panier <AiOutlineShoppingCart className="ml-1" />
                   </span>
                 </div>
               </div>  

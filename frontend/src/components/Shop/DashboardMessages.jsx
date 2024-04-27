@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowRight, AiOutlineSend } from "react-icons/ai";
 import styles from "../../styles/styles";
-import { TfiGallery } from "react-icons/tfi";
+import { AiOutlineMessage } from "react-icons/ai";
 import socketIO from "socket.io-client";
 import { format } from "timeago.js";
 const ENDPOINT = "http://localhost:4000/";
@@ -207,12 +207,19 @@ const DashboardMessages = () => {
   }, [messages]);
 
   return (
-    <div className="w-[90%] bg-white m-5 h-[85vh] overflow-y-scroll rounded">
-      {!open && (
+    <div
+    className={`${styles.section} w-[70%] bg-white p-6 rounded-lg shadow-lg mb-12`}
+  >      {!open && (
         <>
-          <h1 className="text-center text-[30px] py-3 font-Poppins">
-            All Messages
-          </h1>
+        <div className="flex pb-6">
+                <hr />
+                <h1 className="text-[30px] font-Poppins">Tous les messages </h1>
+                <span className="pl-3">
+                  {" "}
+                  <AiOutlineMessage size={39} color="#dea23b" />
+                </span>
+              </div>
+
           {/* All messages list */}
           {conversations &&
             conversations.map((item, index) => (
@@ -288,7 +295,7 @@ const MessageList = ({
 
   return (
     <div
-      className={`w-full flex p-3 px-3 ${
+      className={`w-full flex p-3 px-3 rounded-lg ${
         active === index ? "bg-[#00000010]" : "bg-transparent"
       }  cursor-pointer`}
       onClick={(e) =>
@@ -315,7 +322,7 @@ const MessageList = ({
         <h1 className="text-[18px]">{user?.name}</h1>
         <p className="text-[16px] text-[#000c]">
           {!isLoading && data?.lastMessageId !== user?._id
-            ? "You:"
+            ? "Toi:"
             //: user?.name.split(" ")[0] + ": "}{" "}
             : (user?.name ? user.name.split(" ")[0] + ": " : "")}
           {data?.lastMessage}
@@ -416,12 +423,12 @@ const SellerInbox = ({
           <input
             type="text"
             required
-            placeholder="Enter your message..."
+            placeholder="Entrer votre message..."
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             className={`${styles.input}`}
           />
-          <input type="submit" value="Send" className="hidden" id="send" />
+          <input type="submit" value="Envoyer" className="hidden" id="send" />
           <label htmlFor="send">
             <AiOutlineSend
               size={20}

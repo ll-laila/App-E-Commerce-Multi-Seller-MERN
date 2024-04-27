@@ -16,9 +16,8 @@ import Navbar from "./Navbar";
 import Cart from "../cart/Cart";
 import Wishlist from "../Wishlist/Wishlist";
 import { RxCross1 } from "react-icons/rx";
-import { backend_url,server } from "../../server";
+import { backend_url, server } from "../../server";
 import axios from "axios";
-
 
 const Header = ({ activeHeading }) => {
   const { isSeller } = useSelector((state) => state.seller);
@@ -33,15 +32,17 @@ const Header = ({ activeHeading }) => {
   const { cart } = useSelector((state) => state.cart);
   const { wishlist } = useSelector((state) => state.wishlist);
 
-
   const [allProducts, setAllProducts] = useState([]);
 
   useEffect(() => {
-    axios.get(`${server}/product/get-all-products`).then((res) => {
-      setAllProducts(res.data.products);
-    }).catch((err) => {
-      console.log(err);
-    })
+    axios
+      .get(`${server}/product/get-all-products`)
+      .then((res) => {
+        setAllProducts(res.data.products);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const handleSearchChange = (e) => {
@@ -49,8 +50,8 @@ const Header = ({ activeHeading }) => {
     setSearchTerm(term);
 
     const filteredProducts =
-        allProducts &&
-        allProducts.filter((product) =>
+      allProducts &&
+      allProducts.filter((product) =>
         product.name.toLowerCase().includes(term.toLowerCase())
       );
     setSearchData(filteredProducts);
@@ -69,10 +70,20 @@ const Header = ({ activeHeading }) => {
       <div className={`${styles.section}`}>
         <div className="hidden 800px:h-[50px] 800px:my-[20px] 800px:flex items-center justify-between">
           <div>
-            <Link to="/" >
-               <img className="absolute top-4 left-38" width="56" height="56" src="https://img.icons8.com/external-jumpicon-line-gradient-ayub-irawan/32/external-E-commerce-digital-marketing-jumpicon-(line-gradient)-jumpicon-line-gradient-ayub-irawan.png" alt="external-E-commerce-digital-marketing-jumpicon-(line-gradient)-jumpicon-line-gradient-ayub-irawan"/>
-                <button className="pl-14 text-[#9e1ad75f] text-2xl font-[800]  ">E-Shop</button>
+            <Link to="/">
+              <img
+                className="absolute top-4 left-38"
+                width="56"
+                height="56"
+                src="https://img.icons8.com/external-jumpicon-line-gradient-ayub-irawan/32/external-E-commerce-digital-marketing-jumpicon-(line-gradient)-jumpicon-line-gradient-ayub-irawan.png"
+                alt="external-E-commerce-digital-marketing-jumpicon-(line-gradient)-jumpicon-line-gradient-ayub-irawan"
+              />
+              
+              <button className="pl-14 text-[#9e1ad75f] text-2xl font-[800]  ">
+                E-Shop
+              </button>
             </Link>
+
             
           </div>
           {/* search box */}
@@ -82,7 +93,7 @@ const Header = ({ activeHeading }) => {
               placeholder="Search Product..."
               value={searchTerm}
               onChange={handleSearchChange}
-              className="h-[40px] w-full px-2 border-indigo-500 border-[2px] rounded-md"
+              className="h-[40px] w-full px-2 border-indigo-500 border-[2px] rounded-md shadow-lg"
             />
             <AiOutlineSearch
               size={30}
@@ -92,10 +103,10 @@ const Header = ({ activeHeading }) => {
               <div className="absolute min-h-[30vh] bg-slate-50 shadow-sm-2 z-[9] p-4">
                 {searchData &&
                   searchData.map((i, index) => {
-                   return (
+                    return (
                       <Link to={`/product/${i._id}`}>
                         <img
-                         src={`${backend_url}${i.images[0]}`}
+                          src={`${backend_url}${i.images[0]}`}
                           alt=""
                           className="w-[40px] h-[40px] mr-[10px]"
                         />
@@ -106,23 +117,33 @@ const Header = ({ activeHeading }) => {
               </div>
             ) : null}
           </div>
-          <div className="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-gray-50 rounded-xl flex items-center gap-2">
+          <div className="px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-gray-50 shadow-lg rounded-xl flex items-center gap-2">
             <Link to={`${isSeller ? "/dashboard" : "/shop-create"}`}>
               <h1 className="text-[#fff] flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clip-rule="evenodd" />
-                </svg> 
-                <span>{isSeller ? "  Go Dashboard" : "  Become Seller"}{" "}</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>
+                  {isSeller ? "  Tableau de bord" : "  Devenir vendeur"}{" "}
+                </span>
               </h1>
             </Link>
           </div>
-          
         </div>
       </div>
       <div
         className={`${
           active === true ? "shadow-sm fixed top-0 left-0 z-10" : null
-        } transition hidden 800px:flex items-center justify-between w-full bg-[#9e99d463] h-[70px]`}
+        } transition hidden 800px:flex items-center  justify-between w-full bg-[#9e99d463] h-[70px] shadow-lg`}
       >
         <div
           className={`${styles.section} relative ${styles.noramlFlex} justify-between`}
@@ -132,9 +153,9 @@ const Header = ({ activeHeading }) => {
             <div className="relative h-[70px]  w-[270px] hidden 1000px:block">
               <BiMenuAltLeft size={40} className="absolute top-3 left-2" />
               <button
-                className={`h-[100%] w-full flex justify-between items-center pl-20 hover:text-indigo-400 bg-[#c7c3f363] font-sans text-lg font-[500] select-none `}
+                className={`h-[100%] w-full flex justify-between items-center pl-20  hover:text-indigo-400 bg-[#c7c3f363] font-sans text-lg font-[500] select-none `}
               >
-                All Categories
+                Catégories
               </button>
               <IoIosArrowDown
                 size={20}
@@ -151,7 +172,7 @@ const Header = ({ activeHeading }) => {
           </div>
 
           {/* navitems */}
-          <div className={`${styles.noramlFlex}`}>
+          <div className={`${styles.noramlFlex} `}>
             <Navbar active={activeHeading} />
           </div>
 
@@ -163,7 +184,7 @@ const Header = ({ activeHeading }) => {
               >
                 <AiOutlineHeart size={30} color="rgb(255 255 255 / 83%)" />
                 <span className="absolute right-0 top-0 rounded-full bg-indigo-500 w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
-                 { wishlist && wishlist.length}
+                  {wishlist && wishlist.length}
                 </span>
               </div>
             </div>
@@ -178,7 +199,7 @@ const Header = ({ activeHeading }) => {
                   color="rgb(255 255 255 / 83%)"
                 />
                 <span className="absolute right-0 top-0 rounded-full  bg-indigo-500 w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px] leading-tight text-center">
-                {cart && cart.length}
+                  {cart && cart.length}
                 </span>
               </div>
             </div>
@@ -189,7 +210,6 @@ const Header = ({ activeHeading }) => {
                   <Link to="/profile">
                     <img
                       src={`${backend_url}${user.avatar}`}
-                      
                       className="w-[35px] h-[35px] rounded-full"
                       alt=""
                     />
@@ -244,7 +264,7 @@ const Header = ({ activeHeading }) => {
             >
               <AiOutlineShoppingCart size={30} />
               <span class="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px]  leading-tight text-center">
-              {cart && cart.length}
+                {cart && cart.length}
               </span>
             </div>
           </div>
@@ -269,7 +289,7 @@ const Header = ({ activeHeading }) => {
                   >
                     <AiOutlineHeart size={30} className="mt-5 ml-3" />
                     <span class="absolute right-0 top-0 rounded-full bg-[#3bc177] w-4 h-4 top right p-0 m-0 text-white font-mono text-[12px]  leading-tight text-center">
-                     0
+                      0
                     </span>
                   </div>
                 </div>

@@ -1,19 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import Header from "../components/Layout/Header";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import socketIO from "socket.io-client";
 import { format } from "timeago.js";
 import { server, backend_url } from "../server";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowRight, AiOutlineSend } from "react-icons/ai";
-import { TfiGallery } from "react-icons/tfi";
+import { AiOutlineMessage } from "react-icons/ai";
 import styles from "../styles/styles";
 const ENDPOINT = "http://localhost:4000/";
 const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
 
 const UserInbox = () => {
-  const { user,loading } = useSelector((state) => state.user);
+  const { user, loading } = useSelector((state) => state.user);
   const [conversations, setConversations] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [currentChat, setCurrentChat] = useState();
@@ -161,7 +162,6 @@ const UserInbox = () => {
   };
 
   const imageSendingHandler = async (e) => {
-
     const receiverId = currentChat.members.find(
       (member) => member !== user._id
     );
@@ -174,14 +174,11 @@ const UserInbox = () => {
 
     try {
       await axios
-        .post(
-          `${server}/message/create-new-message`,
-          {
-            sender: user._id,
-            text: newMessage,
-            conversationId: currentChat._id,
-          }
-        )
+        .post(`${server}/message/create-new-message`, {
+          sender: user._id,
+          text: newMessage,
+          conversationId: currentChat._id,
+        })
         .then((res) => {
           setImages();
           setMessages([...messages, res.data.message]);
@@ -207,47 +204,70 @@ const UserInbox = () => {
   }, [messages]);
 
   return (
-    <div className="w-full">
+    <div className="w-full"> 
       {!open && (
         <>
-          <Header />
-          <h1 className="text-center text-[30px] py-3 font-Poppins">
-            All Messages
-          </h1>
-          {/* All messages list */}
-          {conversations &&
-            conversations.map((item, index) => (
-              <MessageList
-                data={item}
-                key={index}
-                index={index}
-                setOpen={setOpen}
-                setCurrentChat={setCurrentChat}
-                me={user?._id}
-                setUserData={setUserData}
-                userData={userData}
-                online={onlineCheck(item)}
-                setActiveStatus={setActiveStatus}
-                loading={loading}
-              />
-            ))}
+          <Header />  
+          <div className="pt-6">
+            <div
+              className={`${styles.section} w-[70%] bg-white p-6 rounded-lg shadow-lg mb-12`}
+            >
+              <div className="flex pb-6">
+                <hr />
+                <h1 className="text-[30px] font-Poppins">Tous les messages </h1>
+                <span className="pl-3">
+                  {" "}
+                  <AiOutlineMessage size={39} color="#dea23b" />
+                </span>
+              </div>
+
+
+              {/* All messages list */}
+              {conversations &&
+                conversations.map((item, index) => (
+                  <MessageList
+                    data={item}
+                    key={index}
+                    index={index}
+                    setOpen={setOpen}
+                    setCurrentChat={setCurrentChat}
+                    me={user?._id}
+                    setUserData={setUserData}
+                    userData={userData}
+                    online={onlineCheck(item)}
+                    setActiveStatus={setActiveStatus}
+                    loading={loading}
+                  />
+                ))}
+            </div>
+          </div>
         </>
       )}
 
       {open && (
-        <SellerInbox
-          setOpen={setOpen}
-          newMessage={newMessage}
-          setNewMessage={setNewMessage}
-          sendMessageHandler={sendMessageHandler}
-          messages={messages}
-          sellerId={user._id}
-          userData={userData}
-          activeStatus={activeStatus}
-          scrollRef={scrollRef}
-        />
+        <>
+          <Header />  
+          <div className="pt-6">
+            <div
+              className={`${styles.section} w-[70%] bg-white p-6 rounded-lg shadow-lg mb-12`}
+            >
+              <SellerInbox
+                setOpen={setOpen}
+                newMessage={newMessage}
+                setNewMessage={setNewMessage}
+                sendMessageHandler={sendMessageHandler}
+                messages={messages}
+                sellerId={user._id}
+                userData={userData}
+                activeStatus={activeStatus}
+                scrollRef={scrollRef}
+              />
+            </div>
+          </div>
+        </>
       )}
     </div>
+   
   );
 };
 
@@ -261,7 +281,7 @@ const MessageList = ({
   userData,
   online,
   setActiveStatus,
-  loading
+  loading,
 }) => {
   const [active, setActive] = useState(0);
   const [user, setUser] = useState([]);
@@ -287,7 +307,7 @@ const MessageList = ({
 
   return (
     <div
-      className={`w-full flex p-3 px-3 ${
+      className={`w-full flex p-3 px-3 rounded-lg ${
         active === index ? "bg-[#00000010]" : "bg-transparent"
       }  cursor-pointer`}
       onClick={(e) =>
@@ -314,7 +334,7 @@ const MessageList = ({
         <h1 className="text-[18px]">{user?.name}</h1>
         <p className="text-[16px] text-[#000c]">
           {!loading && data?.lastMessageId !== userData?._id
-            ? "You:"
+            ? "Toi:"
             : userData?.name.split(" ")[0] + ": "}{" "}
           {data?.lastMessage}
         </p>
@@ -346,7 +366,7 @@ const SellerInbox = ({
           />
           <div className="pl-3">
             <h1 className="text-[18px] font-[600]">{userData?.name}</h1>
-            <h1>{activeStatus ? "Active Now" : ""}</h1>
+            <h1>{activeStatus ? "Actif maintenant" : ""}</h1>
           </div>
         </div>
         <AiOutlineArrowRight
@@ -397,17 +417,17 @@ const SellerInbox = ({
         aria-required={true}
         className="p-3 relative w-full flex justify-between items-center"
         onSubmit={sendMessageHandler}
-      >      
+      >
         <div className="w-full">
           <input
             type="text"
             required
-            placeholder="Enter your message..."
+            placeholder="Enter votre message..."
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             className={`${styles.input}`}
           />
-          <input type="submit" value="Send" className="hidden" id="send" />
+          <input type="submit" value="Envoyer" className="hidden" id="send" />
           <label htmlFor="send">
             <AiOutlineSend
               size={20}

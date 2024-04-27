@@ -4,9 +4,8 @@ import Footer from "../components/Layout/Footer";
 import Header from "../components/Layout/Header";
 import ProductCard from "../components/Route/ProductCard/ProductCard";
 import styles from "../styles/styles";
-import { backend_url,server } from "../server";
+import { server } from "../server";
 import axios from "axios";
-import { productData } from "../static/data";
 
 const ProductsPage = () => {
   const [searchParams] = useSearchParams();
@@ -46,7 +45,7 @@ const ProductsPage = () => {
         </div>
         {data && data.length === 0 ? (
           <h1 className="text-center w-full pb-[100px] text-[20px]">
-            No products Found!
+          Aucun produit trouvé !
           </h1>
         ) : null}
       </div>

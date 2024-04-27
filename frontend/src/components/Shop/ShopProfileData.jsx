@@ -31,29 +31,29 @@ const ShopProfileData = ({ isOwner }) => {
           <div className="flex items-center" onClick={() => setActive(1)}>
             <h5
               className={`font-[600] text-[20px] ${
-                active === 1 ? "text-red-500" : "text-[#333]"
+                active === 1 ? " text-indigo-500" : "text-[#333]"
               } cursor-pointer pr-[20px]`}
             >
-              Shop Products
+             Produits de la boutique
             </h5>
           </div>
           <div className="flex items-center" onClick={() => setActive(2)}>
             <h5
               className={`font-[600] text-[20px] ${
-                active === 2 ? "text-red-500" : "text-[#333]"
+                active === 2 ? "  text-indigo-500 " : "text-[#333]"
               } cursor-pointer pr-[20px]`}
             >
-              Running Events
+              Événements en Cours
             </h5>
           </div>
 
           <div className="flex items-center" onClick={() => setActive(3)}>
             <h5
               className={`font-[600] text-[20px] ${
-                active === 3 ? "text-red-500" : "text-[#333]"
+                active === 3 ? "text-indigo-500 " : "text-[#333]"
               } cursor-pointer pr-[20px]`}
             >
-              Shop Reviews
+             Avis sur la boutique
             </h5>
           </div>
         </div>
@@ -61,11 +61,16 @@ const ShopProfileData = ({ isOwner }) => {
           {isOwner && (
             <div>
               <Link to="/dashboard">
-                <div className={`${styles.button} !rounded-[4px] h-[42px]`}>
-                  <span className="text-[#fff]">Go Dashboard</span>
+                <div className={`${styles.button} rounded-lg text-white  bg-indigo-500 h-[42px] w-[180px]`}>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg> 
+                  <span className="text-[#fff] p-2 ">Aller au boutique</span>
                 </div>
               </Link>
             </div>
+
+
           )}
         </div>
       </div>
@@ -81,7 +86,7 @@ const ShopProfileData = ({ isOwner }) => {
         </div>
          {products && products.length === 0 && (
             <h5 className="w-full text-center py-5 text-[18px]">
-              No Products have for this shop!
+            Aucun produit n'a pour cette boutique !
             </h5>
           )}
        </div>
@@ -103,7 +108,7 @@ const ShopProfileData = ({ isOwner }) => {
           </div>
           {events && events.length === 0 && (
             <h5 className="w-full text-center py-5 text-[18px]">
-              No Events have for this shop!
+              Aucun Événement n'a pour cette boutique !
             </h5>
           )}
         </div>
@@ -131,8 +136,7 @@ const ShopProfileData = ({ isOwner }) => {
             ))}
           {allReviews && allReviews.length === 0 && (
             <h5 className="w-full text-center py-5 text-[18px]">
-              No Reviews have for this shop!
-            </h5>
+            Aucun avis n’a pour cette boutique !            </h5>
           )}
         </div>
       )}

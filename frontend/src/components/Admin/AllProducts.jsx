@@ -21,7 +21,7 @@ const AllProducts = () => {
   }, []);
 
   const columns = [
-    { field: "id", headerName: "Product Id", minWidth: 150, flex: 0.7 },
+    { field: "id", headerName: "Numéro du Produit", minWidth: 150, flex: 0.7 },
     {
       field: "name",
       headerName: "Name",
@@ -30,7 +30,7 @@ const AllProducts = () => {
     },
     {
       field: "price",
-      headerName: "Price",
+      headerName: "Prix",
       minWidth: 100,
       flex: 0.6,
     },
@@ -44,13 +44,13 @@ const AllProducts = () => {
 
     {
       field: "sold",
-      headerName: "Sold out",
+      headerName: "En rupture de stock",
       type: "number",
       minWidth: 130,
       flex: 0.6,
     },
     {
-      field: "Preview",
+      field: "Aperçu",
       flex: 0.8,
       minWidth: 100,
       headerName: "",
@@ -77,7 +77,7 @@ const AllProducts = () => {
       row.push({
         id: item._id,
         name: item.name,
-        price: "US$ " + item.discountPrice,
+        price:  item.discountPrice + " MAD ",
         Stock: item.stock,
         sold: item?.sold_out,
       });
@@ -85,7 +85,7 @@ const AllProducts = () => {
 
   return (
     <>
-        <div className="w-full mx-8 pt-1 mt-10 bg-white">
+        <div className="w-full mx-8 pt-1 mt-10 bg-white shadow-lg">
           <DataGrid
             rows={row}
             columns={columns}

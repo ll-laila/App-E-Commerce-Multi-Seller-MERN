@@ -17,11 +17,11 @@ const AdminDashboardOrders = () => {
   }, []);
 
   const columns = [
-    { field: "id", headerName: "Order ID", minWidth: 150, flex: 0.7 },
+    { field: "id", headerName: "Numéro du commande", minWidth: 150, flex: 0.7 },
 
     {
       field: "status",
-      headerName: "Status",
+      headerName: "Statut",
       minWidth: 130,
       flex: 0.7,
       cellClassName: (params) => {
@@ -32,7 +32,7 @@ const AdminDashboardOrders = () => {
     },
     {
       field: "itemsQty",
-      headerName: "Items Qty",
+      headerName: "Quantité de Prouits",
       type: "number",
       minWidth: 130,
       flex: 0.7,
@@ -47,7 +47,7 @@ const AdminDashboardOrders = () => {
     },
     {
         field: "createdAt",
-        headerName: "Order Date",
+        headerName: "Date de commande",
         type: "number",
         minWidth: 130,
         flex: 0.8,
@@ -60,7 +60,7 @@ const AdminDashboardOrders = () => {
       row.push({
         id: item._id,
         itemsQty: item?.cart?.reduce((acc, item) => acc + item.qty, 0),
-        total: item?.totalPrice + " $",
+        total: item?.totalPrice + " MAD",
         status: item?.status,
         createdAt: item?.createdAt.slice(0,10),
       });
@@ -75,7 +75,7 @@ const AdminDashboardOrders = () => {
           </div>
 
           <div className="w-full min-h-[45vh] pt-5 rounded flex justify-center">
-            <div className="w-[97%] flex justify-center">
+            <div className="w-[97%] flex justify-center shadow-lg">
               <DataGrid
                 rows={row}
                 columns={columns}

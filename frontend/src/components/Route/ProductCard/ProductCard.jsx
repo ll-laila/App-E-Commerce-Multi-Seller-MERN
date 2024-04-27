@@ -52,14 +52,14 @@ const ProductCard = ({data,isEvent}) => {
     const addToCartHandler = (id) => {
       const isItemExists = cart && cart.find((i) => i._id === id);
       if (isItemExists) {
-        alert("Item already in cart!");
+        alert("Article déjà dans le panier !");
       } else {
         if (data.stock < 1) {
-          alert("Product stock limited!");
+          alert("Stock de produits limité !");
         } else {
           const cartData = { ...data, qty: 1 };
           dispatch(addTocart(cartData));
-          alert("Item added to cart successfully!");
+          alert("Article ajouté au panier avec succès !");
         }
       }
     };
@@ -67,7 +67,7 @@ const ProductCard = ({data,isEvent}) => {
 
   return (
     <>
-      <div className="w-full h-[370px] bg-white rounded-lg shadow-sm p-3 relative cursor-pointer">
+      <div className="w-full h-[370px] bg-white rounded-lg  p-3 relative cursor-pointer shadow-lg">
         <div className="flex justify-end"></div>
          <Link to={`${isEvent === true ? `/product/${data._id}?isEvent=true` : `/product/${data._id}`}`}>
               <img   
@@ -92,16 +92,16 @@ const ProductCard = ({data,isEvent}) => {
               <div className="flex">
                 <h5 className={`${styles.productDiscountPrice}`}>
                     {data.originalPrice === 0
-                    ? data.originalPrice
-                    : data.discountPrice}
-                    $
+                    ? data.originalPrice +" MAD"
+                    : data.discountPrice +" MAD"}
+                    
                 </h5>
                 <h4 className={`${styles.price}`}>
-                    {data.originalPrice ? data.originalPrice + " $" : null}
+                    {data.originalPrice ? data.originalPrice + " MAD" : null}
                 </h4>
               </div>
                 <span className="font-[400] text-[17px] text-[#68d284]">
-                 {data?.sold_out} sold
+                 {data?.sold_out} vendu
                 </span>
              </div>
            </Link>
@@ -115,7 +115,7 @@ const ProductCard = ({data,isEvent}) => {
                 className="cursor-pointer absolute right-2 top-5"
                 onClick={() => removeFromWishlistHandler(data)}
                 color={click ? "red" : "#333"}
-                title="Remove from wishlist"         
+                title="Supprimer de la liste de souhaits"         
                 />
             ) : (
                 <AiOutlineHeart
@@ -123,7 +123,7 @@ const ProductCard = ({data,isEvent}) => {
                 className="cursor-pointer absolute right-2 top-5"
                 onClick={() => addToWishlistHandler(data)}
                 color={click ? "red" : "#333"}
-                title="Add to wishlist"
+                title="Ajouter à la liste de souhaits"
                 />
             )}
             <AiOutlineEye
@@ -131,14 +131,14 @@ const ProductCard = ({data,isEvent}) => {
             className="cursor-pointer absolute right-2 top-14"
             onClick={() => setOpen(!open)}
             color="#333"
-            title="Quick view"
+            title="Aperçu rapide"
             />
             <AiOutlineShoppingCart
                 size={25}
                 className="cursor-pointer absolute right-2 top-24"
                 onClick={() => addToCartHandler(data._id)}
                 color="#444"
-                title="Add to cart"
+                title="Ajouter au panier"
             />
             {open ? <ProductDetailsCard setOpen={setOpen} data={data} /> : null}
         </div>
