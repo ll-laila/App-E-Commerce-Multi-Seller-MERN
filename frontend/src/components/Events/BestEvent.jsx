@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styles from "../../styles/styles";
@@ -27,3 +28,34 @@ const BestEvent = () => {
 };
 
 export default BestEvent;
+=======
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import styles from "../../styles/styles";
+import EventCard from "./EventCard";
+
+const BestEvent = () => {
+  const { allEvents, isLoading } = useSelector((state) => state.events);
+
+  return (
+    <div>
+      {!isLoading && (
+        <div className={`${styles.section}`}>
+          <div className={`${styles.heading}`}>
+            <h1>Popular Events</h1>
+          </div>
+
+          <div className="w-full grid">
+            {allEvents.length !== 0 && (
+              <EventCard data={allEvents && allEvents[0]} />
+            )}
+            <h4>{allEvents?.length === 0 && "No Events have!"}</h4>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default BestEvent;
+>>>>>>> 70a7b4d18f820decbe5e08a8aff07762ed54d773
