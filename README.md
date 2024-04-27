@@ -1,1 +1,1 @@
-# App-E-Commerce-Multi-Vendeur-MERN-Private
+# App-E-Commerce-Multi-Vendeur-MERN
