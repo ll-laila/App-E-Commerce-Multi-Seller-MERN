@@ -12,7 +12,6 @@ import { getAllSellers } from "../../redux/actions/sellers";
 
 const AdminDashboardMain = () => {
   const dispatch = useDispatch();
-
   const { adminOrders,adminOrderLoading } = useSelector((state) => state.order);
 
 
@@ -33,7 +32,7 @@ const AdminDashboardMain = () => {
 
     {
       field: "status",
-      headerName: "Status",
+      headerName: "Statut",
       minWidth: 130,
       flex: 0.7,
       cellClassName: (params) => {
@@ -72,7 +71,7 @@ const AdminDashboardMain = () => {
       row.push({
         id: item._id,
         itemsQty: item?.cart?.reduce((acc, item) => acc + item.qty, 0),
-        total: item?.totalPrice + " MAD",
+        total: item?.totalPrice + " $",
         status: item?.status,
         createdAt: item?.createdAt.slice(0,10),
       });
@@ -100,7 +99,7 @@ const AdminDashboardMain = () => {
                 Gain total
               </h3>
             </div>
-            <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">{adminBalance} MAD</h5>
+            <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">{adminBalance} $</h5>
           </div>
   
           <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow-lg rounded px-2 py-5">

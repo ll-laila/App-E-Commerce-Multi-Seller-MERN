@@ -150,7 +150,8 @@ const AllCoupons = () => {
                   />
                 </div>
                 <h6 className="text-[20px] font-Poppins text-center">
-                Créer un code promo                </h6>
+                  Créer un code promo{" "}
+                </h6>
                 {/* create coupoun code */}
                 <form onSubmit={handleSubmit} aria-required={true}>
                   <br />
@@ -171,7 +172,7 @@ const AllCoupons = () => {
                   <br />
                   <div>
                     <label className="pb-2">
-                    Pourcentage de remise{" "}
+                      Pourcentage de remise{" "}
                       <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -217,7 +218,7 @@ const AllCoupons = () => {
                       onChange={(e) => setSelectedProducts(e.target.value)}
                     >
                       <option value="Choisissez vos produits sélectionnés">
-                      Choisissez un produit sélectionné
+                        Choisissez un produit sélectionné
                       </option>
                       {products &&
                         products.map((i) => (

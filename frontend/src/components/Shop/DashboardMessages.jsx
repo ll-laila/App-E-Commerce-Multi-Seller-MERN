@@ -12,9 +12,8 @@ import { format } from "timeago.js";
 const ENDPOINT = "http://localhost:4000/";
 const socketId = socketIO(ENDPOINT, { transports: ["websocket"] });
 
-
 const DashboardMessages = () => {
-  const { seller,isLoading } = useSelector((state) => state.seller);
+  const { seller, isLoading } = useSelector((state) => state.seller);
   const [conversations, setConversations] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [currentChat, setCurrentChat] = useState();
@@ -208,17 +207,19 @@ const DashboardMessages = () => {
 
   return (
     <div
-    className={`${styles.section} w-[70%] bg-white p-6 rounded-lg shadow-lg mb-12`}
-  >      {!open && (
+      className={`${styles.section} w-[70%] bg-white p-6 rounded-lg shadow-lg mb-12`}
+    >
+      {" "}
+      {!open && (
         <>
-        <div className="flex pb-6">
-                <hr />
-                <h1 className="text-[30px] font-Poppins">Tous les messages </h1>
-                <span className="pl-3">
-                  {" "}
-                  <AiOutlineMessage size={39} color="#dea23b" />
-                </span>
-              </div>
+          <div className="flex pb-6">
+            <hr />
+            <h1 className="text-[30px] font-Poppins">Tous les messages </h1>
+            <span className="pl-3">
+              {" "}
+              <AiOutlineMessage size={39} color="#dea23b" />
+            </span>
+          </div>
 
           {/* All messages list */}
           {conversations &&
@@ -239,7 +240,6 @@ const DashboardMessages = () => {
             ))}
         </>
       )}
-
       {open && (
         <SellerInbox
           setOpen={setOpen}
@@ -268,7 +268,7 @@ const MessageList = ({
   setUserData,
   online,
   setActiveStatus,
-  isLoading
+  isLoading,
 }) => {
   console.log(data);
   const [user, setUser] = useState([]);
@@ -323,8 +323,10 @@ const MessageList = ({
         <p className="text-[16px] text-[#000c]">
           {!isLoading && data?.lastMessageId !== user?._id
             ? "Toi:"
-            //: user?.name.split(" ")[0] + ": "}{" "}
-            : (user?.name ? user.name.split(" ")[0] + ": " : "")}
+            : //: user?.name.split(" ")[0] + ": "}{" "}
+            user?.name
+            ? user.name.split(" ")[0] + ": "
+            : ""}
           {data?.lastMessage}
         </p>
       </div>
@@ -384,7 +386,7 @@ const SellerInbox = ({
                     alt=""
                   />
                 )}
-                
+
                 {/*item.images !== "" && item.images && (
                   <img
                     src={`${backend_url}/${userData?.avatar}`}
@@ -392,7 +394,7 @@ const SellerInbox = ({
                     alt=""
                   />
                 )*/}
-               
+
                 {item.text !== "" && (
                   <div>
                     <div

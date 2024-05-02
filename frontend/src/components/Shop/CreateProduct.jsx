@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { categoriesData } from "../../static/data";
 import axios from "axios";
 import { server } from "../../server";
 
-
-
 const CreateProduct = () => {
-
   const { seller } = useSelector((state) => state.seller);
   const navigate = useNavigate();
 
@@ -22,52 +19,47 @@ const CreateProduct = () => {
   const [discountPrice, setDiscountPrice] = useState();
   const [stock, setStock] = useState();
 
-
   const handleSubmit = async (e) => {
-      e.preventDefault();
-      const config = { headers: { "Content-Type": "multipart/form-data" } };
-      const newForm = new FormData();
-      images.forEach((image) => {
-        newForm.append("images", image);
-      });
-      newForm.append("name", name);
-      newForm.append("description", description);
-      newForm.append("category", category);
-      newForm.append("tags", tags);
-      newForm.append("originalPrice", originalPrice);
-      newForm.append("discountPrice", discountPrice);
-      newForm.append("stock", stock);
-      newForm.append("shopId",seller._id);
+    e.preventDefault();
+    const config = { headers: { "Content-Type": "multipart/form-data" } };
+    const newForm = new FormData();
+    images.forEach((image) => {
+      newForm.append("images", image);
+    });
+    newForm.append("name", name);
+    newForm.append("description", description);
+    newForm.append("category", category);
+    newForm.append("tags", tags);
+    newForm.append("originalPrice", originalPrice);
+    newForm.append("discountPrice", discountPrice);
+    newForm.append("stock", stock);
+    newForm.append("shopId", seller._id);
 
-
-      axios.post(`${server}/product/create-product`, newForm,config
-      ).then((res) => {
-         alert(res.message);
-         setName("");
-         setDescription("");
-         setCategory("");
-         setTags("");
-         setOriginalPrice("");
-         setDiscountPrice("");
-         setStock("");
-         setImages([]);
-         navigate("/dashboard");
-         window.location.reload();
-
+    axios
+      .post(`${server}/product/create-product`, newForm, config)
+      .then((res) => {
+        alert(res.message);
+        setName("");
+        setDescription("");
+        setCategory("");
+        setTags("");
+        setOriginalPrice("");
+        setDiscountPrice("");
+        setStock("");
+        setImages([]);
+        navigate("/dashboard");
+        window.location.reload();
       })
       .catch((err) => {
-         alert(err.message)
-      })
-    };
-  
-    const handleImageChange = (e) => {
-      e.preventDefault();
-      let files = Array.from(e.target.files);
-      setImages((prevImages) => [...prevImages, ...files]);
-    };
-    
+        alert(err.message);
+      });
+  };
 
-
+  const handleImageChange = (e) => {
+    e.preventDefault();
+    let files = Array.from(e.target.files);
+    setImages((prevImages) => [...prevImages, ...files]);
+  };
 
   return (
     <div className="w-[90%] 800px:w-[50%] bg-white  shadow-lg h-[80vh] rounded-[4px] p-3 overflow-y-scroll">
@@ -165,7 +157,7 @@ const CreateProduct = () => {
         <br />
         <div>
           <label className="pb-2">
-          Stock de produits <span className="text-red-500">*</span>
+            Stock de produits <span className="text-red-500">*</span>
           </label>
           <input
             type="number"
@@ -177,9 +169,9 @@ const CreateProduct = () => {
           />
         </div>
         <br />
-      <div>    
+        <div>
           <label className="pb-2">
-          Importer des images <span className="text-red-500">*</span>
+            Importer des images <span className="text-red-500">*</span>
           </label>
           <input
             type="file"

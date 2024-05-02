@@ -22,7 +22,7 @@ const AllEvents = () => {
   const handleDelete = (id) => {
     dispatch(deleteEvent(id));
     window.location.reload();
-  }
+  };
 
   const columns = [
     { field: "id", headerName: "Numéro Produit", minWidth: 150, flex: 0.7 },
@@ -54,39 +54,16 @@ const AllEvents = () => {
       flex: 0.6,
     },
     {
-      field: "Aperçu",
+      field: "Supprimer",
       flex: 0.8,
       minWidth: 100,
       headerName: "",
       type: "number",
       sortable: false,
       renderCell: (params) => {
-        const d = params.row.name;
-        const product_name = d.replace(/\s+/g, "-");
         return (
           <>
-            <Link to={`/product/${product_name}`}>
-              <Button>
-                <AiOutlineEye size={20} />
-              </Button>
-            </Link>
-          </>
-        );
-      },
-    },
-    {
-      field: "Supprimer",
-      flex: 0.8,
-      minWidth: 120,
-      headerName: "",
-      type: "number",
-      sortable: false,
-      renderCell: (params) => {
-        return (
-          <>
-            <Button
-            onClick={() => handleDelete(params.id)}
-            >
+            <Button onClick={() => handleDelete(params.id)}>
               <AiOutlineDelete size={20} />
             </Button>
           </>
@@ -98,11 +75,11 @@ const AllEvents = () => {
   const row = [];
 
   events &&
-  events.forEach((item) => {
+    events.forEach((item) => {
       row.push({
         id: item._id,
         name: item.name,
-        price: item.discountPrice + " MAD",
+        price: item.discountPrice + " $",
         Stock: item.stock,
         sold: item.sold_out,
       });

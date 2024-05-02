@@ -28,51 +28,76 @@ const AllWithdraw = () => {
   }, []);
 
   const columns = [
-    { field: "id", headerName: "Numéro", minWidth: 150, flex: 0.7 },
     {
-      field: "name",
-      headerName: "Nom de la boutique",
-      minWidth: 90,
-      flex: 1.4,
+      field: "id",
+      headerName: "Num demande",
+      minWidth: 30,
+      flex: 0.2,
     },
     {
-      field: "shopId",
-      headerName: "Numéro de la boutique ",
-      minWidth: 90,
-      flex: 1.4,
+      field: "name",
+      headerName: "Boutique",
+      minWidth: 20,
+      flex: 0.23,
     },
     {
       field: "amount",
       headerName: "Montant",
-      minWidth: 100,
-      flex: 0.6,
+      minWidth: 20,
+      flex: 0.23,
     },
     {
       field: "status",
       headerName: "Statut",
       type: "text",
-      minWidth: 80,
-      flex: 0.5,
+      minWidth: 13,
+      flex: 0.2,
+    },   
+    {
+      field: "bankHolderName",
+      headerName: " titulaire compte",
+      type: "text",
+      minWidth: 30,
+      flex: 0.3,
     },
     {
-      field: "createdAt",
-      headerName: "Demande faite à",
-      type: "number",
-      minWidth: 130,
-      flex: 0.6,
+      field: "bankAccountNumber",
+      headerName: "Num compte",
+      minWidth: 30,
+      flex: 0.3,
     },
+    {
+      field: "bankName",
+      headerName: "Banque",
+      minWidth: 15,
+      flex: 0.2,
+    }, 
+    {
+      field: "bankSwiftCode",
+      headerName: "SWIFT",
+      minWidth: 16,
+      flex: 0.2,
+    },
+      {
+      field: "createdAt",
+      headerName: "faite à",
+      type: "number",
+      minWidth: 13,
+      flex: 0.2,
+    },
+
     {
       field: " ",
-      headerName: "État de mise à jour",
+      headerName: "Action",
       type: "number",
-      minWidth: 130,
-      flex: 0.6,
+      minWidth: 13,
+      flex: 0.2,
       renderCell: (params) => {
 
         return (
           <BsPencil
             size={20}
-            className={`${params.row.status !== "Processing" ? 'hidden' : '' } mr-5 cursor-pointer`}
+           className={`${params.row.status !== "Processing" ? 'hidden' : '' } mr-5 cursor-pointer`}
             onClick={() => setOpen(true) || setWithdrawData(params.row)}
           />
         );
@@ -98,16 +123,19 @@ const AllWithdraw = () => {
     data.forEach((item) => {
       row.push({
         id: item._id,
-        shopId: item.seller._id,
         name: item.seller.name,
-        amount: item.amount + " MAD ",
+        amount: item.amount + " $ ",
         status: item.status,
+        bankName: item.seller.withdrawMethod.bankName,
+        bankSwiftCode: item.seller.withdrawMethod.bankSwiftCode,
+        bankAccountNumber:item.seller.withdrawMethod.bankAccountNumber,
+        bankHolderName: item.seller.withdrawMethod.bankHolderName,
         createdAt: item.createdAt.slice(0, 10),
       });
     });
   return (
     <div className="w-full flex items-center pt-5 justify-center">
-      <div className="w-[95%] bg-white shadow-lg">
+      <div className="w-[100%] bg-white shadow-lg">
         <DataGrid
           rows={row}
           columns={columns}
@@ -122,10 +150,12 @@ const AllWithdraw = () => {
             <div className="flex justify-end w-full">
               <RxCross1 size={25} onClick={() => setOpen(false)} />
             </div>
-            <h1 className="text-[25px] text-center font-Poppins">
+          <div className="p-5">
+            <h1 className="text-[25px] text-center font-Poppins  ">
             Mettre à jour le statut de retrait
-            </h1>
+            </h1><hr/>
             <br />
+            <div className="w-full flex items-center justify-center">
             <select
               name=""
               id=""
@@ -135,13 +165,18 @@ const AllWithdraw = () => {
               <option value={withdrawStatus}>{withdrawData.status}</option>
               <option value={withdrawStatus}>Succeed</option>
             </select>
+            </div>
+            
+            <div className="w-full flex items-center justify-center">
             <button
               type="submit"
-              className={`block ${styles.button} text-white !h-[42px] mt-4 text-[18px]`}
+              className={`block ${styles.button} text-white !h-[42px] mt-4 text-[18px] `}
               onClick={handleSubmit}
             >
               Modifier
             </button>
+            </div>
+           </div> 
           </div>
         </div>
       )}

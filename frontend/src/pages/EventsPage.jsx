@@ -1,5 +1,4 @@
 import React from "react";
-import EventCard from "../components/Events/EventCard";
 import styles from "../styles/styles";
 import Events from "../components/Events/Events";
 import Header from "../components/Layout/Header";

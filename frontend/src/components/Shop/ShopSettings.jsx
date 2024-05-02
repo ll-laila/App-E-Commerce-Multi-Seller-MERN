@@ -6,8 +6,6 @@ import styles from "../../styles/styles";
 import axios from "axios";
 import { loadSeller } from "../../redux/actions/user";
 
-
-
 const ShopSettings = () => {
   const { seller } = useSelector((state) => state.seller);
   const [avatar, setAvatar] = useState();
@@ -22,21 +20,24 @@ const ShopSettings = () => {
   const dispatch = useDispatch();
 
   const handleImage = async (e) => {
-      e.preventDefault();
-      const file = e.target.files[0];
-      setAvatar(file);
+    e.preventDefault();
+    const file = e.target.files[0];
+    setAvatar(file);
 
-      const formData = new FormData();
+    const formData = new FormData();
 
-      formData.append("image", file);
+    formData.append("image", file);
 
-      await axios.put(`${server}/shop/update-shop-avatar`, formData, {
+    await axios
+      .put(`${server}/shop/update-shop-avatar`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-        },withCredentials: true,
-      }).then((res) => {
-        dispatch(loadSeller());
+        },
+        withCredentials: true,
       })
+      .then((res) => {
+        dispatch(loadSeller());
+      });
   };
 
   const updateHandler = async (e) => {
@@ -70,7 +71,10 @@ const ShopSettings = () => {
           <div className="relative">
             <img
               src={
-                   avatar ? URL.createObjectURL(avatar) : `${backend_url}/${seller.avatar}`}
+                avatar
+                  ? URL.createObjectURL(avatar)
+                  : `${backend_url}/${seller.avatar}`
+              }
               alt=""
               className="w-[200px] h-[200px] rounded-full cursor-pointer"
             />

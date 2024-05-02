@@ -17,11 +17,11 @@ const AdminSideBar = ({ active }) => {
         <Link to="/admin/dashboard" className="w-full flex items-center">
           <RxDashboard
             size={30}
-            color={`${active === 1 ? "#8307b8cd" : "#555"}`}
+            color={`${active === 1 ? "#870bbcf4" : "#555"}`}
           />
           <h5
-            className={`hidden 800px:block pl-2 text-[18px] font-[400] ${
-              active === 1 ? "text-[#8307b8cd]" : "text-[#555]"
+            className={`hidden 800px:block pl-2 text-[18px] font-[560] ${
+              active === 1 ? "text-[#870bbcf4]" : "text-[#555]"
             }`}
           >
             Tableau de bord
@@ -34,11 +34,11 @@ const AdminSideBar = ({ active }) => {
         <Link to="/admin-orders" className="w-full flex items-center">
           <FiShoppingBag
             size={30}
-            color={`${active === 2 ? "#8307b8cd" : "#555"}`}
+            color={`${active === 2 ? "#870bbcf4" : "#555"}`}
           />
           <h5
-            className={`hidden 800px:block pl-2 text-[18px] font-[400] ${
-              active === 2 ? "text-[#8307b8cd]" : "text-[#555]"
+            className={`hidden 800px:block pl-2 text-[18px] font-[560] ${
+              active === 2 ? "text-[#870bbcf4]" : "text-[#555]"
             }`}
           >
            Les Commandes
@@ -50,11 +50,11 @@ const AdminSideBar = ({ active }) => {
         <Link to="/admin-sellers" className="w-full flex items-center">
           <GrWorkshop
             size={30}
-            color={`${active === 3 ? "#8307b8cd" : "#555"}`}
+            color={`${active === 3 ? "#870bbcf4" : "#555"}`}
           />
           <h5
-            className={`hidden 800px:block pl-2 text-[18px] font-[400] ${
-              active === 3 ? "text-[#8307b8cd]" : "text-[#555]"
+            className={`hidden 800px:block pl-2 text-[18px] font-[560] ${
+              active === 3 ? "text-[#870bbcf4]" : "text-[#555]"
             }`}
           >
             Les vendeurs
@@ -66,11 +66,11 @@ const AdminSideBar = ({ active }) => {
         <Link to="/admin-users" className="w-full flex items-center">
           <HiOutlineUserGroup
             size={30}
-            color={`${active === 4 ? "#8307b8cd" : "#555"}`}
+            color={`${active === 4 ? "#870bbcf4" : "#555"}`}
           />
           <h5
-            className={`hidden 800px:block pl-2 text-[18px] font-[400] ${
-              active === 4 ? "text-[#8307b8cd]" : "text-[#555]"
+            className={`hidden 800px:block pl-2 text-[18px] font-[560] ${
+              active === 4 ? "text-[#870bbcf4]" : "text-[#555]"
             }`}
           >
            Les utilisateurs
@@ -82,11 +82,11 @@ const AdminSideBar = ({ active }) => {
         <Link to="/admin-products" className="w-full flex items-center">
           <BsHandbag
             size={30}
-            color={`${active === 5 ? "#8307b8cd" : "#555"}`}
+            color={`${active === 5 ? "#870bbcf4" : "#555"}`}
           />
           <h5
-            className={`hidden 800px:block pl-2 text-[18px] font-[400] ${
-              active === 5 ? "text-[#8307b8cd]" : "text-[#555]"
+            className={`hidden 800px:block pl-2 text-[18px] font-[560] ${
+              active === 5 ? "text-[#870bbcf4]" : "text-[#555]"
             }`}
           >
             Les produits
@@ -98,11 +98,11 @@ const AdminSideBar = ({ active }) => {
         <Link to="/admin-events" className="w-full flex items-center">
           <MdOutlineLocalOffer
             size={30}
-            color={`${active === 6 ? "#8307b8cd" : "#555"}`}
+            color={`${active === 6 ? "#870bbcf4" : "#555"}`}
           />
           <h5
-            className={`hidden 800px:block pl-2 text-[18px] font-[400] ${
-              active === 6 ? "text-[#8307b8cd]" : "text-[#555]"
+            className={`hidden 800px:block pl-2 text-[18px] font-[560] ${
+              active === 6 ? "text-[#870bbcf4]" : "text-[#555]"
             }`}
           >
            Les événements
@@ -119,11 +119,11 @@ const AdminSideBar = ({ active }) => {
         >
           <CiMoneyBill
             size={30}
-            color={`${active === 7 ? "#8307b8cd" : "#555"}`}
+            color={`${active === 7 ? "#870bbcf4" : "#555"}`}
           />
           <h5
-            className={`hidden 800px:block pl-2 text-[18px] font-[400] ${
-              active === 7 ? "text-[#8307b8cd]" : "text-[#555]"
+            className={`hidden 800px:block pl-2 text-[18px] font-[560] ${
+              active === 7 ? "text-[#870bbcf4]" : "text-[#555]"
             }`}
           >
            Demande de retrait
@@ -138,11 +138,11 @@ const AdminSideBar = ({ active }) => {
         >
           <AiOutlineSetting
             size={30}
-            color={`${active === 8 ? "#8307b8cd" : "#555"}`}
+            color={`${active === 8 ? "#870bbcf4" : "#555"}`}
           />
           <h5
-            className={`hidden 800px:block pl-2 text-[18px] font-[400] ${
-              active === 8 ? "text-[#8307b8cd]" : "text-[#555]"
+            className={`hidden 800px:block pl-2 text-[18px] font-[560] ${
+              active === 8 ? "text-[#870bbcf4]" : "text-[#555]"
             }`}
           >
           Paramètres

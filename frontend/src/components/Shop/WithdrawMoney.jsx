@@ -270,7 +270,7 @@ const WithdrawMoney = () => {
               </div>
             ) : (
               <>
-                <h3 className="text-[22px] font-Poppins font-Poppins">
+                <h3 className="text-[22px] font-Poppins">
                   Méthodes de Retrait Disponibles :
                 </h3>
                 <hr />
@@ -305,7 +305,7 @@ const WithdrawMoney = () => {
                     <h4>
                       <b>Solde Disponible : </b>
                       {"   "}
-                      {availableBalance}MAD
+                      {availableBalance}$
                     </h4>
                     <br />
                     <div className="800px:flex w-full items-center">
@@ -324,7 +324,7 @@ const WithdrawMoney = () => {
                       </div>
                     </div>
                   </div>
-                ) : (
+                 ) : (
                   <div className="p-5">
                     <p className="text-[18px] pt-2 pl-52 ">
                       <b>Pas de méthodes de retrait disponibles!</b>

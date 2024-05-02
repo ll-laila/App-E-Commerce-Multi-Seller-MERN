@@ -34,7 +34,7 @@ const ShopProfileData = ({ isOwner }) => {
                 active === 1 ? " text-indigo-500" : "text-[#333]"
               } cursor-pointer pr-[20px]`}
             >
-             Produits de la boutique
+              Produits de la boutique
             </h5>
           </div>
           <div className="flex items-center" onClick={() => setActive(2)}>
@@ -53,7 +53,7 @@ const ShopProfileData = ({ isOwner }) => {
                 active === 3 ? "text-indigo-500 " : "text-[#333]"
               } cursor-pointer pr-[20px]`}
             >
-             Avis sur la boutique
+              Avis sur la boutique
             </h5>
           </div>
         </div>
@@ -61,37 +61,45 @@ const ShopProfileData = ({ isOwner }) => {
           {isOwner && (
             <div>
               <Link to="/dashboard">
-                <div className={`${styles.button} rounded-lg text-white  bg-indigo-500 h-[42px] w-[180px]`}>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clip-rule="evenodd" />
-                </svg> 
+                <div
+                  className={`${styles.button} rounded-lg text-white  bg-indigo-500 h-[42px] w-[180px]`}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
                   <span className="text-[#fff] p-2 ">Aller au boutique</span>
                 </div>
               </Link>
             </div>
-
-
           )}
         </div>
       </div>
 
       <br />
       {active === 1 && (
-       <div className="w-full"> 
-        <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-3 lg:gap-[25px] xl:grid-cols-4 xl:gap-[20px] mb-12 border-0">
-          {products &&
-            products.map((i, index) => (
-              <ProductCard data={i} key={index} isShop={true} />
-            ))}
-        </div>
-         {products && products.length === 0 && (
+        <div className="w-full">
+          <div className="grid grid-cols-1 gap-[20px] md:grid-cols-2 md:gap-[25px] lg:grid-cols-3 lg:gap-[25px] xl:grid-cols-4 xl:gap-[20px] mb-12 border-0">
+            {products &&
+              products.map((i, index) => (
+                <ProductCard data={i} key={index} isShop={true} />
+              ))}
+          </div>
+          {products && products.length === 0 && (
             <h5 className="w-full text-center py-5 text-[18px]">
-            Aucun produit n'a pour cette boutique !
+              Aucun produit n'a pour cette boutique !
             </h5>
           )}
-       </div>
+        </div>
       )}
-      
 
       {active === 2 && (
         <div className="w-full">
@@ -130,13 +138,16 @@ const ShopProfileData = ({ isOwner }) => {
                     <Ratings rating={item.rating} />
                   </div>
                   <p className="font-[400] text-[#000000a7]">{item?.comment}</p>
-                  <p className="text-[#000000a7] text-[14px]">{item?.createdAt.slice(0, 10)}</p>
+                  <p className="text-[#000000a7] text-[14px]">
+                    {item?.createdAt.slice(0, 10)}
+                  </p>
                 </div>
               </div>
             ))}
           {allReviews && allReviews.length === 0 && (
             <h5 className="w-full text-center py-5 text-[18px]">
-            Aucun avis n’a pour cette boutique !            </h5>
+              Aucun avis n’a pour cette boutique !{" "}
+            </h5>
           )}
         </div>
       )}

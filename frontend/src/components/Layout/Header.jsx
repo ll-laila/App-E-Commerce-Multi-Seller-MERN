@@ -75,16 +75,14 @@ const Header = ({ activeHeading }) => {
                 className="absolute top-4 left-38"
                 width="56"
                 height="56"
-                src="https://img.icons8.com/external-jumpicon-line-gradient-ayub-irawan/32/external-E-commerce-digital-marketing-jumpicon-(line-gradient)-jumpicon-line-gradient-ayub-irawan.png"
-                alt="external-E-commerce-digital-marketing-jumpicon-(line-gradient)-jumpicon-line-gradient-ayub-irawan"
+                src="https://p1.hiclipart.com/preview/845/670/469/ecommerce-logo-shopping-cart-online-shopping-shopping-centre-shopping-cart-software-shopping-bag-pink-vehicle-png-clipart.jpg"
+                alt="logo"
               />
-              
-              <button className="pl-14 text-[#9e1ad75f] text-2xl font-[800]  ">
-                E-Shop
+
+              <button className="pl-14 text-[30px] font-bold italic">
+                e-shop
               </button>
             </Link>
-
-            
           </div>
           {/* search box */}
           <div className="w-[50%] relative">
