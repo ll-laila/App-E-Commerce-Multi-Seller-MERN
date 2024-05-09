@@ -4,6 +4,8 @@ import styles from "../../styles/styles";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { server } from "../../server";
+import { toast } from "react-toastify";
+
 
 const ShopLogin = () => {
   const navigate = useNavigate();
@@ -23,13 +25,13 @@ const ShopLogin = () => {
         },
         { withCredentials: true }
       )
-      .then((res) => {
-        alert("Connexion réussie !");
+      .then((res) => {   
         navigate("/dashboard");
         window.location.reload(true);
+         toast.success("Connexion réussie !");
       })
       .catch((err) => {
-        alert(err.response.data.message);
+        toast.error(err.response.data.message);
       });
   };
 

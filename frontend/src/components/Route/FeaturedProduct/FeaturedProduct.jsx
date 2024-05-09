@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+//import { useSearchParams } from "react-router-dom";
 import styles from "../../../styles/styles";
 import ProductCard from "../ProductCard/ProductCard";
 import axios from "axios";
 import { server } from "../../../server";
 
 const FeaturedProduct = () => {
-  const [searchParams] = useSearchParams();
-  const categoryData = searchParams.get("category");
+ // const [searchParams] = useSearchParams();
+ // const categoryData = searchParams.get("category");
   const [data, setData] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -30,11 +30,17 @@ const FeaturedProduct = () => {
   }, [allProducts]);
 
   const goToPreviousProducts = () => {
-    setCurrentIndex(currentIndex - 5 >= 0 ? currentIndex - 5 : data.length - 4);
+    setCurrentIndex((prevIndex) => {
+      const newIndex = prevIndex - 1;
+      return newIndex < 0 ? data.length - 1 : newIndex;
+    });
   };
 
   const goToNextProducts = () => {
-    setCurrentIndex(currentIndex + 5 < data.length ? currentIndex + 5 : 0);
+    setCurrentIndex((prevIndex) => {
+      const newIndex = prevIndex + 1;
+      return newIndex >= data.length ? 0 : newIndex;
+    });
   };
 
   return (
@@ -53,23 +59,28 @@ const FeaturedProduct = () => {
                     <ProductCard data={product} />
                   </div>
                 ))}
-
-              <div className="col-span-5 flex justify-center">
-                <button
-                  onClick={goToPreviousProducts}
-                  className="bg-gray-200 px-3 py-1 rounded-md mr-2"
-                >
-                  &lt; Précédent
-                </button>
-                <button
-                  onClick={goToNextProducts}
-                  className="bg-gray-200 px-3 py-1 rounded-md ml-2"
-                >
-                  Suivant &gt;
-                </button>
-              </div>
             </>
           )}
+        </div>
+        <div class="flex items-center justify-center py-6 lg:px-0 sm:px-6 px-2 pb-4">
+          <div class="lg:w-3/5 w-full  flex items-center justify-between border-t border-gray-200">
+            <div class="flex items-center pt-3 text-gray-600 hover:text-indigo-700 cursor-pointer" onClick={goToNextProducts}>
+              <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M1.1665 4L4.49984 7.33333" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M1.1665 4.00002L4.49984 0.666687" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <p class="text-[16px] ml-3 font-medium leading-none ">Avant</p>
+            </div>
+            <div class="flex items-center pt-3 text-gray-600 hover:text-indigo-700 cursor-pointer" onClick={goToPreviousProducts}>
+              <p class="text-[16px] font-medium leading-none mr-3">Suivant</p>
+              <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.1665 4H12.8332" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9.5 7.33333L12.8333 4" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M9.5 0.666687L12.8333 4.00002" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
     </div>

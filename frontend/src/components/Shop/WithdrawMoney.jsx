@@ -6,7 +6,10 @@ import { RxCross1 } from "react-icons/rx";
 import axios from "axios";
 import { server } from "../../server";
 import { loadSeller } from "../../redux/actions/user";
+import { toast } from "react-toastify";
 import { AiOutlineDelete } from "react-icons/ai";
+
+
 
 const WithdrawMoney = () => {
   const [open, setOpen] = useState(false);
@@ -50,7 +53,7 @@ const WithdrawMoney = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        alert("La méthode de retrait a été ajoutée avec succès !");
+        toast.success("La méthode de retrait a été ajoutée avec succès !");
         dispatch(loadSeller());
         setBankInfo({
           bankName: "",
@@ -72,18 +75,18 @@ const WithdrawMoney = () => {
         withCredentials: true,
       })
       .then((res) => {
-        alert("La méthode de retrait a été supprimée avec succès !");
+        toast.success("La méthode de retrait a été supprimée avec succès !");
         dispatch(loadSeller());
       });
   };
 
   const error = () => {
-    alert("Vous n'avez pas assez de solde pour effectuer un retrait !");
+    toast.error("Vous n'avez pas assez de solde pour effectuer un retrait !");
   };
 
   const withdrawHandler = async () => {
     if (withdrawAmount < 50 || withdrawAmount > availableBalance) {
-      alert("Vous ne pouvez pas retirer cette somme !");
+      toast.error("Vous ne pouvez pas retirer cette somme !");
     } else {
       const amount = withdrawAmount;
       await axios
@@ -93,7 +96,7 @@ const WithdrawMoney = () => {
           { withCredentials: true }
         )
         .then((res) => {
-          alert("La demande de retrait d'argent a été effectuée avec succès !");
+          toast.success("La demande de retrait d'argent a été effectuée avec succès !");
         });
     }
   };

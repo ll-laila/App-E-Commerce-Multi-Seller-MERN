@@ -16,7 +16,7 @@ import Navbar from "./Navbar";
 import Cart from "../cart/Cart";
 import Wishlist from "../Wishlist/Wishlist";
 import { RxCross1 } from "react-icons/rx";
-import { backend_url, server } from "../../server";
+import { server } from "../../server";
 import axios from "axios";
 
 const Header = ({ activeHeading }) => {
@@ -75,7 +75,7 @@ const Header = ({ activeHeading }) => {
                 className="absolute top-4 left-38"
                 width="56"
                 height="56"
-                src="https://p1.hiclipart.com/preview/845/670/469/ecommerce-logo-shopping-cart-online-shopping-shopping-centre-shopping-cart-software-shopping-bag-pink-vehicle-png-clipart.jpg"
+                src="https://svgsilh.com/svg/35594.svg"
                 alt="logo"
               />
 
@@ -104,7 +104,7 @@ const Header = ({ activeHeading }) => {
                     return (
                       <Link to={`/product/${i._id}`}>
                         <img
-                          src={`${backend_url}${i.images[0]}`}
+                          src={`${i.images[0]?.url}`}
                           alt=""
                           className="w-[40px] h-[40px] mr-[10px]"
                         />
@@ -207,9 +207,9 @@ const Header = ({ activeHeading }) => {
                 {isAuthenticated ? (
                   <Link to="/profile">
                     <img
-                      src={`${backend_url}${user.avatar}`}
-                      className="w-[35px] h-[35px] rounded-full"
-                      alt=""
+                       src={`${user?.avatar?.url}`}
+                       className="w-[35px] h-[35px] rounded-full"
+                       alt=""
                     />
                   </Link>
                 ) : (
@@ -316,9 +316,9 @@ const Header = ({ activeHeading }) => {
                         <Link to={`/product/${Product_name}`}>
                           <div className="flex items-center">
                             <img
-                              src={i.image_Url[0].url}
-                              alt=""
-                              className="w-[50px] mr-2"
+                                src={i.image_Url[0]?.url}
+                                alt=""
+                                className="w-[50px] mr-2"
                             />
                             <h5>{i.name}</h5>
                           </div>
@@ -346,7 +346,7 @@ const Header = ({ activeHeading }) => {
                   <div>
                     <Link to="/profile">
                       <img
-                        src={`${backend_url}${user.avatar}`}
+                        src={`${user.avatar?.url}`}
                         alt=""
                         className="w-[60px] h-[60px] rounded-full border-[3px] border-[#0eae88]"
                       />

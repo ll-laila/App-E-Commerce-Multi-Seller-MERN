@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { getAllProductsShop } from "../../redux/actions/product";
 import { deleteProduct } from "../../redux/actions/product";
 import Loader from "../Layout/Loader";
+import { toast } from "react-toastify";
 
 const AllProducts = () => {
   const { products, isLoading } = useSelector((state) => state.products);
@@ -20,19 +21,8 @@ const AllProducts = () => {
   const handleDelete = (id) => {
     dispatch(deleteProduct(id));
     window.location.reload();
+    toast.success('Produit créé avec succès !');
   };
-
-  /*   const handleDelete = (id) => {
-        axios.delete(`${server}/product/delete-shop-product/${id}`, { withCredentials: true })
-          .then((res) => {
-            alert('Product deleted successfully');
-             window.location.reload();
-          })
-          .catch((err) => {
-            console.error('Error deleting product:', err);
-            alert(err.message);
-          });
-      };*/
 
   const columns = [
     { field: "id", headerName: "Numéro du Produit", minWidth: 150, flex: 0.7 },

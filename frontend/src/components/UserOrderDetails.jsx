@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BsFillBagFill } from "react-icons/bs";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../styles/styles";
 import { getAllOrdersOfUser } from "../redux/actions/order";
@@ -8,12 +8,13 @@ import { server } from "../server";
 import { RxCross1 } from "react-icons/rx";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import axios from "axios";
-import { backend_url } from "../server";
+import { toast } from "react-toastify";
+
+
 
 const UserOrderDetails = () => {
   const { orders } = useSelector((state) => state.order);
   const { user, isAuthenticated } = useSelector((state) => state.user);
-  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -43,28 +44,28 @@ const UserOrderDetails = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        alert(res.data.message);
+        toast.success(res.data.message);
         dispatch(getAllOrdersOfUser(user._id));
         setComment("");
         setRating(null);
         setOpen(false);
       })
       .catch((error) => {
-        alert(error);
+        toast.error(error);
       });
   };
-
+  
   const refundHandler = async () => {
     await axios
       .put(`${server}/order/order-refund/${id}`, {
         status: "Processing refund",
       })
       .then((res) => {
-        alert(res.data.message);
+        toast.success(res.data.message);
         dispatch(getAllOrdersOfUser(user._id));
       })
       .catch((error) => {
-        alert(error.response.data.message);
+        toast.success(error.response.data.message);
       });
   };
 
@@ -94,7 +95,7 @@ const UserOrderDetails = () => {
           return (
             <div className="w-full flex items-start mb-5">
               <img
-                src={`${backend_url}/${item.images[0]}`}
+              src={`${item.images[0]?.url}`}
                 alt=""
                 className="w-[80x] h-[80px] pr-10"
               />
@@ -133,7 +134,7 @@ const UserOrderDetails = () => {
             <br />
             <div className="w-full flex">
               <img
-                src={`${backend_url}${selectedItem.images[0]}`}
+                src={`${selectedItem?.images[0]?.url}`}
                 alt=""
                 className="w-[80px] h-[80px]"
               />
@@ -215,10 +216,8 @@ const UserOrderDetails = () => {
           <h4 className="text-[20px]">
             {data?.shippingAddress.address1 }
           </h4>
-         { /*<h4 className=" text-[20px]"><b>Ville :</b> {" "}{data?.shippingAddress.country}</h4>
-          <h4 className=" text-[20px]"><b>Adresse :</b> {" "}{data?.shippingAddress.city}</h4>*/}
           <h4 className="pt-3 text-[20px] font-[400]"><b>Tél :</b> </h4>
-          <h4 className=" text-[20px]">{data?.user?.phoneNumber}</h4>
+          <h4 className=" text-[20px]">{user.phoneNumber}</h4>
         </div>
         <div className="w-full 800px:w-[40%]">
           <h4 className="pt-3 text-[20px]"><b>Information de paiement :</b></h4>

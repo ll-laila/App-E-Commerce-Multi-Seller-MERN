@@ -15,8 +15,6 @@ const productSchema = new mongoose.Schema({
   },
   tags: {
     type: String,
-    required: [true, "Please enter your product tags !"],
-
   },
   originalPrice: {
     type: Number,
@@ -30,36 +28,43 @@ const productSchema = new mongoose.Schema({
     required: [true, "Please enter your product stock!"],
   },
   images: [
-    {        
+    {
+      public_id: {
         type: String,
-    }
-], 
-reviews: [
-  {
-    user: {
-      type: Object,
+        required: true,
+      },
+      url: {
+        type: String,
+        required: true,
+      },
     },
-    rating: {
-      type: Number,
+  ],
+  reviews: [
+    {
+      user: {
+        type: Object,
+      },
+      rating: {
+        type: Number,
+      },
+      comment: {
+        type: String,
+      },
+      productId: {
+        type: String,
+      },
+      createdAt:{
+        type: Date,
+        default: Date.now(),
+      }
     },
-    comment: {
-      type: String,
-    },
-    productId: {
-      type: String,
-    },
-    createdAt:{
-      type: Date,
-      default: Date.now(),
-    }
+  ],
+  ratings: {
+    type: Number,
   },
-],
-ratings: {
-  type: Number,
-},
   shopId: {
     type: String,
-    required:true,
+    required: true,
   },
   shop: {
     type: Object,

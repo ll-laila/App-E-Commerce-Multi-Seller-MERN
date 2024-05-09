@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useRef, useState } from "react";
 import { useEffect } from "react";
-import { server, backend_url } from "../../server";
+import { server } from "../../server";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowRight, AiOutlineSend } from "react-icons/ai";
@@ -308,7 +308,7 @@ const MessageList = ({
     >
       <div className="relative">
         <img
-          src={`${backend_url}/${user?.avatar}`}
+          src={`${user?.avatar?.url}`}
           alt=""
           className="w-[50px] h-[50px] rounded-full"
         />
@@ -352,7 +352,7 @@ const SellerInbox = ({
       <div className="w-full flex p-3 items-center justify-between bg-slate-200">
         <div className="flex">
           <img
-            src={`${backend_url}/${userData?.avatar}`}
+            src={`${userData?.avatar?.url}`}
             alt=""
             className="w-[60px] h-[60px] rounded-full"
           />
@@ -386,14 +386,6 @@ const SellerInbox = ({
                     alt=""
                   />
                 )}
-
-                {/*item.images !== "" && item.images && (
-                  <img
-                    src={`${backend_url}/${userData?.avatar}`}
-                    className="w-[300px] h-[300px] object-cover rounded-[10px] mr-2"
-                    alt=""
-                  />
-                )*/}
 
                 {item.text !== "" && (
                   <div>

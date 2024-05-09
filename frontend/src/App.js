@@ -59,6 +59,10 @@ import { useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+
 
 const App = () => {
   
@@ -332,8 +336,21 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         />
-
           </Routes>
+          <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+
+
         </BrowserRouter>
    
   );

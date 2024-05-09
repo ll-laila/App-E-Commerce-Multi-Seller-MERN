@@ -1,8 +1,4 @@
 import React from "react";
-import { AiOutlineGift } from "react-icons/ai";
-import { BiMessageSquareDetail } from "react-icons/bi";
-import { FiPackage, FiShoppingBag } from "react-icons/fi";
-import { MdOutlineLocalOffer } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -17,7 +13,7 @@ const AdminHeader = () => {
             className="absolute top-4 left-38"
             width="56"
             height="56"
-            src="https://p1.hiclipart.com/preview/845/670/469/ecommerce-logo-shopping-cart-online-shopping-shopping-centre-shopping-cart-software-shopping-bag-pink-vehicle-png-clipart.jpg"
+            src="https://svgsilh.com/svg/35594.svg"
             alt="logo"
           />
 

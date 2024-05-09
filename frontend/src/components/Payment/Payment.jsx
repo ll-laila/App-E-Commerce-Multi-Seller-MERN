@@ -12,6 +12,7 @@ import {
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { server } from "../../server";
+import { toast } from "react-toastify";
 
 const Payment = () => {
   const [orderData, setOrderData] = useState([]);
@@ -63,7 +64,7 @@ const Payment = () => {
       });
 
       if (result.error) {
-        alert(result.error.message);
+        toast.error(result.error.message);
       } else {
         if (result.paymentIntent.status === "succeeded") {
           order.paymnentInfo = {
@@ -84,7 +85,7 @@ const Payment = () => {
         }
       }
     } catch (error) {
-      alert(error);
+      toast.error(error);
     }
   };
 
@@ -287,6 +288,13 @@ const PaymentInfo = ({
 const CartData = ({ orderData}) => {
   const shipping = orderData?.shipping?.toFixed(2);
 
+  const [amountMAD,setAmountMAD] = useState(0)
+  
+  useEffect(() => {
+    const exchangeRate = 10.0; // Taux de change USD vers MAD
+    setAmountMAD(orderData?.totalPrice * exchangeRate);
+  }, []);
+
   return (
     <div className="w-full bg-[#fff] rounded-md p-5 pb-8">
       <div className="flex justify-between">
@@ -310,6 +318,7 @@ const CartData = ({ orderData}) => {
       <h5 className="text-[18px] font-[600] text-end pt-3">
         {orderData?.totalPrice} $
       </h5>
+      <h5 className="text-[18px] font-[600] text-end pt-3">{amountMAD} MAD</h5>
     </div>
   );
 };

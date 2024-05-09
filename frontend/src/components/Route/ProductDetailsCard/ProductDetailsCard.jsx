@@ -12,12 +12,11 @@ import {
   addToWishlist,
   removeFromWishlist,
 } from "../../../redux/actions/wishlist";
-import { backend_url } from "../../../server";
 import { useDispatch, useSelector } from "react-redux";
 import { addTocart } from "../../../redux/actions/cart";
 import axios from "axios";
 import { server } from "../../../server";
-
+import { toast } from "react-toastify";
 
 const ProductDetailsCard = ({ setOpen, data }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
@@ -44,10 +43,10 @@ const ProductDetailsCard = ({ setOpen, data }) => {
           navigate(`/inbox?${res.data.conversation._id}`);
         })
         .catch((error) => {
-          alert(error.response.data.message);
+          toast.error(error.response.data.message);
         });
     } else {
-      alert("Veuillez vous connecter pour créer une conversation");
+      toast.error("Veuillez vous connecter pour créer une conversation");
     }
   };
 
@@ -64,14 +63,14 @@ const ProductDetailsCard = ({ setOpen, data }) => {
   const addToCartHandler = (id) => {
     const isItemExists = cart && cart.find((i) => i._id === id);
     if (isItemExists) {
-      alert("Article déjà dans le panier !");
+      toast.error("Article déjà dans le panier !");
     } else {
       if (data.stock < count) {
-        alert("Stock de produits limité !");
+        toast.error("Stock de produits limité !");
       } else {
         const cartData = { ...data, qty: count };
         dispatch(addTocart(cartData));
-        alert("Article ajouté au panier avec succès !");
+        toast.success("Article ajouté au panier avec succès !");
       }
     }
   };
@@ -123,14 +122,14 @@ const ProductDetailsCard = ({ setOpen, data }) => {
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%]">
                 <img
-                  src={`${backend_url}${data.images && data.images[0]}`}
+                 src={`${data.images && data.images[0]?.url}`}
                   alt=""
                   className="p-3"
                 />
                 <div className="flex">
                   <Link to={`/shop/preview/${data.shop._id}`} className="flex">
                     <img
-                      src={`${backend_url}${data.shop.avatar}`}
+                      src={`${data.images && data.images[0]?.url}`}
                       alt=""
                       className="w-[50px] h-[50px] rounded-full mr-2"
                     />

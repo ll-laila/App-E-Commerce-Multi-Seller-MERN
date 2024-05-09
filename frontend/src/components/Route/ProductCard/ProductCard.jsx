@@ -3,27 +3,25 @@ import { Link } from "react-router-dom";
 import styles from "../../../styles/styles";
 import {
   AiFillHeart,
-  AiFillStar,
   AiOutlineEye,
   AiOutlineHeart,
   AiOutlineShoppingCart,
-  AiOutlineStar,
 } from "react-icons/ai";
 import {
   addToWishlist,
   removeFromWishlist,
 } from "../../../redux/actions/wishlist";
 import ProductDetailsCard from "../ProductDetailsCard/ProductDetailsCard";
-import { backend_url } from "../../../server";
 import { useDispatch, useSelector } from "react-redux";
 import { addTocart } from "../../../redux/actions/cart";
 import Ratings from "../../Products/Ratings";
+import { toast } from "react-toastify";
+
 
 const ProductCard = ({ data, isEvent }) => {
   const { cart } = useSelector((state) => state.cart);
   const { wishlist } = useSelector((state) => state.wishlist);
   const [click, setClick] = useState(false);
-  const [count, setCount] = useState(1);
   const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
@@ -49,14 +47,14 @@ const ProductCard = ({ data, isEvent }) => {
   const addToCartHandler = (id) => {
     const isItemExists = cart && cart.find((i) => i._id === id);
     if (isItemExists) {
-      alert("Article déjà dans le panier !");
+      toast.error("Article déjà dans le panier !");
     } else {
       if (data.stock < 1) {
-        alert("Stock de produits limité !");
+        toast.error("Stock de produits limité !");
       } else {
         const cartData = { ...data, qty: 1 };
         dispatch(addTocart(cartData));
-        alert("Article ajouté au panier avec succès !");
+        toast.success("Article ajouté au panier avec succès !");
       }
     }
   };
@@ -73,7 +71,7 @@ const ProductCard = ({ data, isEvent }) => {
           }`}
         >
           <img
-            src={`${backend_url}${data.images && data.images[0]}`}
+            src={`${data.images && data.images[0]?.url}`}
             alt=""
             className="w-full h-[170px] object-contain"
           />

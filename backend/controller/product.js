@@ -2,42 +2,46 @@ const express = require("express");
 const { isSeller, isAuthenticated, isAdmin } = require("../middleware/auth");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const router = express.Router();
-const { upload } = require("../multer");
 const Product = require("../model/product");
-const Shop = require("../model/shop");
 const Order = require("../model/order");
+const Shop = require("../model/shop");
+const cloudinary = require("cloudinary");
 const ErrorHandler = require("../utils/ErrorHandler");
-const path = require("path");
-const fs = require("fs");
 
-
-// create product
+// create product 
 router.post(
-  "/create-product",upload.array("images"), 
+  "/create-product",
   catchAsyncErrors(async (req, res, next) => {
     try {
-      const {  name, description, category, tags, originalPrice, discountPrice, stock, shopId } = req.body;
+      const shopId = req.body.shopId;
       const shop = await Shop.findById(shopId);
       if (!shop) {
-        return next(new ErrorHandler("Shop Id is invalid!!!", 400));
-
+        return next(new ErrorHandler("Shop Id is invalid!", 400));
       } else {
-        const files = req.files;
-        const imageUrls = files.map((file) => `${file.filename}`);
-       // console.log(req.body.shopId);
-        const productData = {
-          name: name,
-          description: description,
-          category: category,
-          tags: tags,
-          originalPrice: originalPrice,
-          discountPrice: discountPrice,
-          stock: stock,
-          images :imageUrls,
-          shopId: shopId,
-          shop : shop,
-        };
-  
+        let images = [];
+
+        if (typeof req.body.images === "string") {
+          images.push(req.body.images);
+        } else {
+          images = req.body.images;
+        }
+      
+        const imagesLinks = [];
+      
+        for (let i = 0; i < images.length; i++) {
+          const result = await cloudinary.v2.uploader.upload(images[i], {
+            folder: "products",
+          });
+      
+          imagesLinks.push({
+            public_id: result.public_id,
+            url: result.secure_url,
+          });
+        }
+      
+        const productData = req.body;
+        productData.images = imagesLinks;
+        productData.shop = shop;
 
         const product = await Product.create(productData);
 
@@ -52,15 +56,13 @@ router.post(
   })
 );
 
-
-
 // get all products of a shop
 router.get(
   "/get-all-products-shop/:id",
   catchAsyncErrors(async (req, res, next) => {
     try {
       const products = await Product.find({ shopId: req.params.id });
-      //console.log(products);
+
       res.status(201).json({
         success: true,
         products,
@@ -68,9 +70,8 @@ router.get(
     } catch (error) {
       return next(new ErrorHandler(error, 400));
     }
-  })
+  }) 
 );
-
 
 // delete product of a shop
 router.delete(
@@ -78,36 +79,29 @@ router.delete(
   isSeller,
   catchAsyncErrors(async (req, res, next) => {
     try {
-      
-      const productData = await Product.findById(req.params.id);
-      
-      productData.images.forEach(async (imageUrl) => {
-          const filename = imageUrl;
-          const filePath =  `uploads/${filename}`;
-          fs.unlink(filePath, (err) => {
-            if (err) {
-              console.log(err);
-              res.status(500).json({ message: "Error deleting file" });
-            }
-          });
-      })
-
-      const product = await Product.findByIdAndDelete(req.params.id);
+      const product = await Product.findById(req.params.id);
 
       if (!product) {
         return next(new ErrorHandler("Product is not found with this id", 404));
       }    
+
+      for (let i = 0; 1 < product.images.length; i++) {
+        const result = await cloudinary.v2.uploader.destroy(
+          product.images[i].public_id
+        );
+      }
+    
+      await product.remove();
+
       res.status(201).json({
         success: true,
-        message: "product deleted successfully!",
+        message: "Product Deleted successfully!",
       });
     } catch (error) {
       return next(new ErrorHandler(error, 400));
     }
   })
 );
-
-
 
 // get all products
 router.get(
@@ -184,6 +178,7 @@ router.put(
 );
 
 
+
 // all products --- for admin
 router.get(
   "/admin-all-products",
@@ -203,6 +198,4 @@ router.get(
     }
   })
 );
-
-
 module.exports = router;

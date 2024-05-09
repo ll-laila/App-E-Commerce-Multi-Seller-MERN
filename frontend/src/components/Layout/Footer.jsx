@@ -1,16 +1,5 @@
 import React from "react";
-import {
-  AiFillFacebook,
-  AiFillInstagram,
-  AiFillYoutube,
-  AiOutlineTwitter,
-} from "react-icons/ai";
 import { Link } from "react-router-dom";
-import {
-  footercompanyLinks,
-  footerProductLinks,
-  footerSupportLinks,
-} from "../../static/data";
 import { navItems } from "../../static/data";
 import { categoriesData } from "../../static/data";
 

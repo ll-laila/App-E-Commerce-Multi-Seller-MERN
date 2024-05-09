@@ -1,6 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import Hero from "../Route/Hero/Hero";
 import { useSelector } from "react-redux";
 import styles from "../../styles/styles";
 import EventCard from "./EventCard";

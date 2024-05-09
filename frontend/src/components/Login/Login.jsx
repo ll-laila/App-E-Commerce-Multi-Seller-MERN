@@ -4,6 +4,9 @@ import styles from "../../styles/styles";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { server } from "../../server";
+import { toast } from "react-toastify";
+
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -24,12 +27,12 @@ const Login = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        alert("Login Success!");
         navigate("/");
         window.location.reload(true);
+        toast.success("Connexion réussie !");
       })
       .catch((err) => {
-        alert(err.response.data.message);
+        toast.error(err.response.data.message);
       });
   };
 

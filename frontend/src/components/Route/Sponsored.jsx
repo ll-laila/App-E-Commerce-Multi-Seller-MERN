@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "../../styles/styles";
+import { toast } from "react-toastify";
+
 
 const Sponsored = () => {
   return (

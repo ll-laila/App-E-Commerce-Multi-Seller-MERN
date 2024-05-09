@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "../../styles/styles";
 import Loader from "../Layout/Loader";
 import { server } from "../../server";
+import { toast } from "react-toastify";
 
 const AllCoupons = () => {
   const [open, setOpen] = useState(false);
@@ -42,7 +43,7 @@ const AllCoupons = () => {
     axios
       .delete(`${server}/coupon/delete-coupon/${id}`, { withCredentials: true })
       .then((res) => {
-        alert("Coupon code deleted succesfully!");
+        toast.success("Code promo supprimé avec succès !");
       });
     window.location.reload();
   };
@@ -64,12 +65,12 @@ const AllCoupons = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        alert("Coupon code created successfully!");
+        toast.success("Code promo créé avec succès !");
         setOpen(false);
         window.location.reload();
       })
       .catch((error) => {
-        alert(error.response.data.message);
+        toast.error(error.response.data.message);
       });
   };
 

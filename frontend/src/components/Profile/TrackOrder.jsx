@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { getAllOrdersOfUser } from "../../redux/actions/order";
-import { RxCross1 } from "react-icons/rx";
+
 
 const TrackOrder = () => {
   const { orders } = useSelector((state) => state.order);
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+ 
 
   const { id } = useParams();
 

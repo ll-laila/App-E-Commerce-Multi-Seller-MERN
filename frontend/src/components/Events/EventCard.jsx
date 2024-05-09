@@ -4,7 +4,7 @@ import CountDown from "./CountDown";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addTocart } from "../../redux/actions/cart";
-import { backend_url } from "../../server";
+import { toast } from "react-toastify";
 
 const EventCard = ({ active, data }) => {
   const { cart } = useSelector((state) => state.cart);
@@ -13,28 +13,28 @@ const EventCard = ({ active, data }) => {
   const addToCartHandler = (data) => {
     const isItemExists = cart && cart.find((i) => i._id === data._id);
     if (isItemExists) {
-      alert("Item already in cart!");
+      toast.error("Article déjà dans le panier !");
     } else {
       if (data.stock < 1) {
-        alert("Product stock limited!");
+        toast.error("Stock de produits limité !");
       } else {
         const cartData = { ...data, qty: 1 };
         dispatch(addTocart(cartData));
-        alert("Article ajouté au panier avec succès!");
+        toast.success("Article ajouté au panier avec succès!");
       }
     }
   };
 
   return (
     <div
-      className={`w-full block bg-white rounded-lg shadow-lg ${
+      className={`w-full block  bg-white rounded-lg shadow-lg ${
         active ? "unset" : "mb-12"
       } lg:flex p-2`}
     >
       <div className="w-full lg:-w[40%] m-auto">
-        <img src={`${backend_url}${data.images[0]}`} alt="" />
+       <img src={`${data.images[0]?.url}`} alt="" />
       </div>
-      <div className="w-full lg:[w-50%] flex flex-col justify-center">
+      <div className=" container p-3 w-full lg:[w-50%] flex flex-col justify-center">
         <h2 className={`${styles.productTitle}`}>{data.name}</h2>
         <p>{data.description}</p>
         <div className="flex py-2 justify-between">

@@ -1,9 +1,10 @@
 import { React, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "../../styles/styles";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { server } from "../../server";
+import { toast } from "react-toastify";
 import { RxAvatar } from "react-icons/rx";
 
 const ShopCreate = () => {
@@ -18,20 +19,19 @@ const ShopCreate = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const config = { headers: { "Content-Type": "multipart/form-data" } };
-    const newForm = new FormData();
-    newForm.append("file", avatar);
-    newForm.append("name", name);
-    newForm.append("email", email);
-    newForm.append("password", password);
-    newForm.append("zipCode", zipCode);
-    newForm.append("address", address);
-    newForm.append("phoneNumber", phoneNumber);
 
     axios
-      .post(`${server}/shop/create-shop`, newForm, config)
+      .post(`${server}/shop/create-shop`, {
+        name,
+        email,
+        password,
+        avatar,
+        zipCode,
+        address,
+        phoneNumber,
+      })
       .then((res) => {
-        alert(res.message);
+        toast.success(res.data.message);
         setName("");
         setEmail("");
         setPassword("");
@@ -40,21 +40,28 @@ const ShopCreate = () => {
         setAddress("");
         setPhoneNumber();
       })
-      .catch((err) => {
-        alert(err.message);
+      .catch((error) => {
+        toast.error(error.response.data.message);
       });
   };
 
   const handleFileInputChange = (e) => {
-    const file = e.target.files[0];
-    setAvatar(file);
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setAvatar(reader.result);
+      }
+    };
+
+    reader.readAsDataURL(e.target.files[0]);
   };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          S'inscrire en tant que vendeur
+          Register as a seller
         </h2>
       </div>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[35rem]">
@@ -65,7 +72,7 @@ const ShopCreate = () => {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-                Nom du Boutique
+               Nom de la boutique
               </label>
               <div className="mt-1">
                 <input
@@ -84,7 +91,7 @@ const ShopCreate = () => {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-                Numéro de téléphone
+               Numéro de téléphone
               </label>
               <div className="mt-1">
                 <input
@@ -103,7 +110,7 @@ const ShopCreate = () => {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-                Email{" "}
+                Email 
               </label>
               <div className="mt-1">
                 <input
@@ -142,7 +149,7 @@ const ShopCreate = () => {
                 htmlFor="email"
                 className="block text-sm font-medium text-gray-700"
               >
-                Code Postale
+                Code postal
               </label>
               <div className="mt-1">
                 <input
@@ -161,7 +168,7 @@ const ShopCreate = () => {
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700"
               >
-                Mot de passe
+              Mot de passe
               </label>
               <div className="mt-1 relative">
                 <input
@@ -198,7 +205,7 @@ const ShopCreate = () => {
                 <span className="inline-block h-8 w-8 rounded-full overflow-hidden">
                   {avatar ? (
                     <img
-                      src={URL.createObjectURL(avatar)}
+                      src={avatar}
                       alt="avatar"
                       className="h-full w-full object-cover rounded-full"
                     />
@@ -210,7 +217,7 @@ const ShopCreate = () => {
                   htmlFor="file-input"
                   className="ml-5 flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
                 >
-                  <span>Télécharger un fichier</span>
+                  <span>importer une image</span>
                   <input
                     type="file"
                     name="avatar"
@@ -227,13 +234,13 @@ const ShopCreate = () => {
                 type="submit"
                 className="group relative w-full h-[40px] flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
               >
-                Soumettre
+                Submit
               </button>
             </div>
             <div className={`${styles.noramlFlex} w-full`}>
-              <h4>Vous avez déjà un compte ?</h4>
+              <h4>Vous avez déjà un compte?</h4>
               <Link to="/shop-login" className="text-blue-600 pl-2">
-                Se connecter
+                Sign in
               </Link>
             </div>
           </form>

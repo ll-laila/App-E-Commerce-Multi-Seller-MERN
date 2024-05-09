@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { server } from "../../server";
-import { Link } from "react-router-dom";
 import { DataGrid } from "@material-ui/data-grid";
 import { BsPencil } from "react-icons/bs";
 import { RxCross1 } from "react-icons/rx";
 import styles from "../../styles/styles";
 import { toast } from "react-toastify";
+
 
 const AllWithdraw = () => {
   const [data, setData] = useState([]);
@@ -111,7 +111,7 @@ const AllWithdraw = () => {
         sellerId: withdrawData.shopId,
       },{withCredentials: true})
       .then((res) => {
-        alert("Demande de retrait mise à jour avec succès !");
+        toast.success("Demande de retrait mise à jour avec succès !");
         setData(res.data.withdraws);
         setOpen(false);
       });

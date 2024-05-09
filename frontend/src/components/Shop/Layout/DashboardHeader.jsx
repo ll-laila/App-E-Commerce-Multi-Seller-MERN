@@ -5,7 +5,7 @@ import { FiPackage, FiShoppingBag } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { BiMessageSquareDetail } from "react-icons/bi";
-import { backend_url } from "../../../server";
+
 
 const DashboardHeader = () => {
   const { seller } = useSelector((state) => state.seller);
@@ -17,7 +17,7 @@ const DashboardHeader = () => {
             className="absolute top-4 left-38"
             width="56"
             height="56"
-            src="https://p1.hiclipart.com/preview/845/670/469/ecommerce-logo-shopping-cart-online-shopping-shopping-centre-shopping-cart-software-shopping-bag-pink-vehicle-png-clipart.jpg"
+            src="https://svgsilh.com/svg/35594.svg"
             alt="logo"
           />
 
@@ -59,7 +59,7 @@ const DashboardHeader = () => {
           </Link>
           <Link to={`/shop/${seller._id}`}>
             <img
-              src={`${backend_url}${seller.avatar}`}
+              src={`${seller.avatar?.url}`}
               alt=""
               className="w-[50px] h-[50px] rounded-full object-cover"
             />

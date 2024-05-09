@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";
 import { server } from "../../server";
-
+import { toast } from "react-toastify";
 
 
 const Checkout = () => {
@@ -29,7 +29,7 @@ const Checkout = () => {
 
   const paymentSubmit = () => {
    if(address1 === "" || address2 === "" || zipCode === null || country === "" || city === ""){
-      alert("Please choose your delivery address!")
+    toast.error("Please choose your delivery address!")
    } else{
     const shippingAddress = {
       address1,
@@ -78,7 +78,7 @@ const Checkout = () => {
           cart && cart.filter((item) => item.shopId === shopId);
 
         if (isCouponValid.length === 0) {
-          alert("Le code promo n'est pas valable pour cette boutique");
+          toast.error("Le code promo n'est pas valable pour cette boutique");
           setCouponCode("");
         } else {
           const eligiblePrice = isCouponValid.reduce(
@@ -92,7 +92,7 @@ const Checkout = () => {
         }
       }
       if (res.data.couponCode === null) {
-        alert("Coupon code doesn't exists!");
+        toast.error("Coupon code doesn't exists!");
         setCouponCode("");
       }
     });
@@ -349,7 +349,7 @@ const CartData = ({
         <input
           type="text"
           className={`${styles.input} h-[40px] pl-2`}
-          placeholder="Coupoun code"
+          placeholder="Code promo"
           value={couponCode}
           onChange={(e) => setCouponCode(e.target.value)}
           required

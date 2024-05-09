@@ -6,7 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllOrdersOfShop } from "../../redux/actions/order";
 import { server } from "../../server";
 import axios from "axios";
-import { backend_url } from "../../server";
+import { toast } from "react-toastify";
+
+
 
 const OrderDetails = () => {
   const { orders, isLoading } = useSelector((state) => state.order);
@@ -33,11 +35,11 @@ const OrderDetails = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        alert("Commande mise à jour !");
         navigate("/dashboard-orders");
+        toast.success("Commande mise à jour !");
       })
       .catch((error) => {
-        alert(error.response.data.message);
+        toast.error(error.response.data.message);
       });
   };
 
@@ -51,11 +53,11 @@ const OrderDetails = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        alert("Commande mise à jour!");
         dispatch(getAllOrdersOfShop(seller._id));
+         toast.success("Commande mise à jour!");
       })
       .catch((error) => {
-        alert(error.response.data.message);
+        toast.error(error.response.data.message);
       });
   };
 
@@ -92,7 +94,7 @@ const OrderDetails = () => {
         data?.cart.map((item, index) => (
           <div className="w-full flex items-start mb-5">
             <img
-              src={`${backend_url}${item.images[0]}`}
+              src={`${item.images[0]?.url}`}
               alt=""
               className="w-[80x] h-[80px] pr-10"
             />

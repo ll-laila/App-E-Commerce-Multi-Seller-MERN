@@ -21,9 +21,9 @@ import {
 import { Country, State } from "country-state-city";
 import { useEffect } from "react";
 import axios from "axios";
-import { backend_url } from "../../server";
 import { getAllOrdersOfUser } from "../../redux/actions/order";
 import UserInbox from "../../pages/UserInbox.jsx";
+import { toast } from "react-toastify";
 
 const ProfileContent = ({ active }) => {
   const { user, error, successMessage } = useSelector((state) => state.user);
@@ -32,18 +32,15 @@ const ProfileContent = ({ active }) => {
   const [phoneNumber, setPhoneNumber] = useState(user && user.phoneNumber);
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState(null);
-  const [zipCode, setZipCode] = useState();
-  const [address1, setAddress1] = useState("");
-  const [address2, setAddress2] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (error) {
-      alert(error);
+      toast.error(error);
       dispatch({ type: "clearErrors" });
     }
     if (successMessage) {
-      alert(successMessage);
+      toast.success(successMessage);
       dispatch({ type: "clearMessages" });
     }
   }, [error, successMessage]);
@@ -71,7 +68,7 @@ const ProfileContent = ({ active }) => {
         dispatch(loadUser());
       })
       .catch((err) => {
-        alert(err);
+        toast.error(err);
         console.log(err);
       });
   };
@@ -84,7 +81,7 @@ const ProfileContent = ({ active }) => {
           <div className="flex justify-center w-full">
             <div className="relative">
               <img
-                src={`${backend_url}${user?.avatar}`}
+               src={`${user?.avatar?.url}`}
                 className="w-[150px] h-[150px] rounded-full object-cover border-[3px] border-[#dea23b] "
                 alt=""
               />
@@ -272,7 +269,7 @@ const AllOrders = () => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
-        total: item.totalPrice + " MAD",
+        total: item.totalPrice + " $",
         status: item.status,
       });
     });
@@ -360,7 +357,7 @@ const AllRefundOrders = () => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
-        total: item.totalPrice + " MAD",
+        total: item.totalPrice + " $",
         status: item.status,
       });
     });
@@ -445,7 +442,7 @@ const TrackOrder = () => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
-        total: item.totalPrice + " MAD ",
+        total: item.totalPrice + " $ ",
         status: item.status,
       });
     });
@@ -478,13 +475,13 @@ const ChangePassword = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        alert(res.data.success);
         setOldPassword("");
         setNewPassword("");
         setConfirmPassword("");
+        toast.success("Votre Mot de passe est bien changé.");
       })
       .catch((error) => {
-        alert(error.response.data.message);
+        toast.error(error.response.data.message);
       });
   };
   return (
@@ -573,7 +570,7 @@ const Address = () => {
     e.preventDefault();
 
     if (addressType === "" || country === "" || city === "") {
-      alert("Veuillez remplir tous les champs !");
+      toast.error("Veuillez remplir tous les champs !");
     } else {
       dispatch(
         updatUserAddress(
