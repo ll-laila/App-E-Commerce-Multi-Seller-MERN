@@ -44,12 +44,12 @@ router.post("/create-shop", catchAsyncErrors(async (req, res, next) => {
     try {
       await sendMail({
         email: seller.email,
-        subject: "Activate your Shop",
-        message: `Hello ${seller.name}, please click on the link to activate your shop : ${activationUrl}`,
+        subject: "Activer votre boutique",
+        message: `Bonjour ${seller.name}, s'il vous plait cliquer sur le lien pour activer votre boutique: ${activationUrl}`,
       });
       res.status(201).json({
         success: true,
-        message: `please check your email:- ${seller.email} to activate your shop!`,
+        message: `s'il vous plait vérifier votre email:- ${seller.email} pour activer votre boutique !`,
       });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
@@ -79,7 +79,7 @@ router.post(
       );
 
       if (!newSeller) {
-        return next(new ErrorHandler("Invalid token", 400));
+        return next(new ErrorHandler("token invalide", 400));
       }
       const { name, email, password, avatar, zipCode, address, phoneNumber } =
         newSeller;
@@ -87,7 +87,7 @@ router.post(
       let seller = await Shop.findOne({ email });
 
       if (seller) {
-        return next(new ErrorHandler("User already exists", 400));
+        return next(new ErrorHandler("utilisateur déjà existe", 400));
       }
 
       seller = await Shop.create({
@@ -115,20 +115,20 @@ router.post(
       const { email, password } = req.body;
 
       if (!email || !password) {
-        return next(new ErrorHandler("Please provide the all fields!", 400));
+        return next(new ErrorHandler("Veuillez fournir tous les champs !", 400));
       }
 
       const user = await Shop.findOne({ email }).select("+password");
 
       if (!user) {
-        return next(new ErrorHandler("User doesn't exists!", 400));
+        return next(new ErrorHandler("L'utilisateur n'existe pas !", 400));
       }
 
       const isPasswordValid = await user.comparePassword(password);
 
       if (!isPasswordValid) {
         return next(
-          new ErrorHandler("Please provide the correct information", 400)
+          new ErrorHandler("Veuillez fournir les informations correctes", 400)
         );
       }
 
@@ -148,7 +148,7 @@ router.get(
       const seller = await Shop.findById(req.seller._id);
 
       if (!seller) {
-        return next(new ErrorHandler("User doesn't exists", 400));
+        return next(new ErrorHandler("L'utilisateur n'existe pas ", 400));
       }
 
       res.status(200).json({
@@ -174,7 +174,7 @@ router.get(
       });
       res.status(201).json({
         success: true,
-        message: "Log out successful!",
+        message: "Déconnexion réussie !",
       });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
@@ -244,7 +244,7 @@ router.put(
       const shop = await Shop.findOne(req.seller._id);
 
       if (!shop) {
-        return next(new ErrorHandler("User not found", 400));
+        return next(new ErrorHandler("Utilisateur non trouvé", 400));
       }
 
       shop.name = name;
@@ -296,7 +296,7 @@ router.delete(
 
       if (!seller) {
         return next(
-          new ErrorHandler("Seller is not available with this id", 400)
+          new ErrorHandler("Le vendeur n'est pas disponible avec cet identifiant", 400)
         );
       }
 
@@ -304,7 +304,7 @@ router.delete(
 
       res.status(201).json({
         success: true,
-        message: "Seller deleted successfully!",
+        message: "Vendeur supprimé avec succès !",
       });
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
@@ -343,7 +343,7 @@ router.delete(
       const seller = await Shop.findById(req.seller._id);
 
       if (!seller) {
-        return next(new ErrorHandler("Seller not found with this id", 400));
+        return next(new ErrorHandler("Vendeur introuvable avec cet identifiant", 400));
       }
 
       seller.withdrawMethod = null;

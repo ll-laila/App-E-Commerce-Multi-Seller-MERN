@@ -6,8 +6,6 @@ import axios from "axios";
 import { server } from "../../../server";
 
 const FeaturedProduct = () => {
- // const [searchParams] = useSearchParams();
- // const categoryData = searchParams.get("category");
   const [data, setData] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -25,8 +23,9 @@ const FeaturedProduct = () => {
 
   useEffect(() => {
     let sortedData = [...allProducts];
+    sortedData.sort(() => Math.random() - 0.9);
     sortedData.sort((a, b) => b.discountPrice - a.discountPrice);
-    setData(sortedData.slice(0, 10)); // Affichage des 10 premiers produits
+    setData(sortedData);
   }, [allProducts]);
 
   const goToPreviousProducts = () => {

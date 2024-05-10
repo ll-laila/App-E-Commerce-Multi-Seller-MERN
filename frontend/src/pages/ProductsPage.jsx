@@ -1,44 +1,54 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import Footer from "../components/Layout/Footer";
 import Header from "../components/Layout/Header";
+import Loader from "../components/Layout/Loader";
 import ProductCard from "../components/Route/ProductCard/ProductCard";
 import styles from "../styles/styles";
-import { server } from "../server";
-import axios from "axios";
 
 const ProductsPage = () => {
   const [searchParams] = useSearchParams();
   const categoryData = searchParams.get("category");
+  const {allProducts,isLoading} = useSelector((state) => state.products);
   const [data, setData] = useState([]);
-
-  const [allProducts, setAllProducts] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`${server}/product/get-all-products`)
-      .then((res) => {
-        setAllProducts(res.data.products);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   useEffect(() => {
     if (categoryData === null) {
-      const d =
-        allProducts && allProducts.sort((a, b) => a.sold_out - b.sold_out);
+      const d = allProducts;
       setData(d);
     } else {
       const d =
-        allProducts && allProducts.filter((i) => i.category === categoryData);
+      allProducts && allProducts.filter((i) => i.category === categoryData);
       setData(d);
     }
   }, [allProducts]);
 
+
+
+  useEffect(() => {
+    let randomizedData = [...allProducts]; 
+
+    if (categoryData !== null) {
+      randomizedData = randomizedData.filter((i) => i.category === categoryData);
+    }
+
+    // Fonction de comparaison aléatoire pour le tri aléatoire
+    const randomComparison = () => Math.random() - 0.5;
+    randomizedData.sort(randomComparison);
+
+    setData(randomizedData);
+  }, [allProducts, categoryData]);
+
+
+
   return (
-    <div>
+  <>
+  {
+    isLoading ? (
+      <Loader />
+    ) : (
+      <div>
       <Header activeHeading={3} />
       <br />
       <br />
@@ -48,13 +58,17 @@ const ProductsPage = () => {
         </div>
         {data && data.length === 0 ? (
           <h1 className="text-center w-full pb-[100px] text-[20px]">
-            Aucun produit trouvé !
+          Aucun produit trouvé !
           </h1>
         ) : null}
       </div>
       <Footer />
     </div>
+    )
+  }
+  </>
   );
 };
 
 export default ProductsPage;
+

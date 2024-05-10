@@ -105,7 +105,7 @@ const AdminSideBar = ({ active }) => {
               active === 6 ? "text-[#870bbcf4]" : "text-[#555]"
             }`}
           >
-           Les événements
+           Les promontions
           </h5>
         </Link>
       </div>
