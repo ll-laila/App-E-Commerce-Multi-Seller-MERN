@@ -1,3 +1,5 @@
 # Application MERN E-Commerce Multi Vendeur.
 
-Le projet vise à fournir une approche centralisée et flexible pour une expérience client fluide et unifiée tout en répondant aux besoins variés des vendeurs tiers. L'utilisation de MongoDB pour la base de données, d'Express.js pour la création d'une API robuste, de React.js pour une interface utilisateur interactive et de Node.js pour la gestion côté serveur assure une performance optimale. Le déploiement sur AWS garantit une infrastructure scalable et fiable. En combinant la puissance de la pile MERN avec les fonctionnalités d'AWS, notre objectif est de créer une plateforme e-commerce multi-vendeurs robuste et évolutive, offrant une expérience utilisateur exceptionnelle aux acheteurs et répondant aux besoins des vendeurs tiers.
+Le projet utilise la pile MERN (MongoDB, Express.js, React.js, Node.js) pour développer une plateforme e-commerce multi-vendeurs. Il offre une expérience client fluide et unifiée, tout en répondant aux besoins des vendeurs tiers. MongoDB gère la base de données, Express.js crée une API robuste, React.js fournit une interface utilisateur interactive et Node.js assure la gestion côté serveur.
+
+
