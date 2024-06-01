@@ -27,11 +27,11 @@ const EventCard = ({ active, data }) => {
 
   return (
     <div
-      className={`w-full block  bg-white rounded-lg shadow-lg ${
+      className={`w-full block  bg-white  rounded-lg shadow-lg ${
         active ? "unset" : "mb-12"
       } lg:flex p-2`}
     >
-      <div className="w-full lg:-w[40%] m-auto">
+      <div className="w-full lg:-w[40%] m-auto ">
        <img src={`${data.images[0]?.url}`} alt="" />
       </div>
       <div className=" container p-3 w-full lg:[w-50%] flex flex-col justify-center">

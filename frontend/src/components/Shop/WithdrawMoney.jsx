@@ -107,7 +107,7 @@ const WithdrawMoney = () => {
     <div className="w-full h-[90vh] p-8 shadow-lg">
       <div className="w-full bg-white h-full rounded flex items-center justify-center flex-col">
         <h5 className="text-[50px] pb-4 ">
-          Available Balance:
+        Solde disponible:
           <span className="font-bold"> ${availableBalance}</span>
         </h5>
         <div

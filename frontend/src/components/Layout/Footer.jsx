@@ -5,9 +5,9 @@ import { categoriesData } from "../../static/data";
 
 const Footer = () => {
   return (
-    <div className="bg-[#000] text-white">
-      <div className="grid grid-cols-1 sm:gird-cols-3 lg:grid-cols-4 gap-6 sm:px-8 px-5 py-16 sm:text-center">
-        <ul className="px-5 text-center sm:text-start flex sm:block flex-col items-center">
+    <div className="bg-[#000] text-white ">
+      <div className="flex justify-between  grid-cols-1  sm:gird-cols-3 lg:grid-cols-4 gap-6 sm:px-8 px-5 py-16 sm:text-center">
+        <ul className="px-5 text-center sm:text-start flex sm:block flex-col items-center w-[30%]">
           <div>
             <Link to="/">
               <button className="pl-3 text-[50px] font-bold italic">
@@ -18,8 +18,11 @@ const Footer = () => {
 
           <br />
           <p>
-            Explorez notre vaste sélection de produits de qualité pour répondre
-            à tous vos besoins, le tout avec un service client exceptionnel.
+          Explorez notre vaste sélection de produits de qualité, soigneusement sélectionnés 
+          pour répondre à tous vos besoins. Profitez d'un service client exceptionnel qui vous
+           accompagne à chaque étape de votre expérience d'achat. Que vous recherchiez des articles
+            pour la maison, des gadgets technologiques, ou des produits de beauté, nous avons ce 
+            qu'il vous faut pour satisfaire vos attentes. 
           </p>
         </ul>
 

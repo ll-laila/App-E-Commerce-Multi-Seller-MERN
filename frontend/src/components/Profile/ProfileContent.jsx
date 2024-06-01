@@ -78,24 +78,13 @@ const ProfileContent = ({ active }) => {
       {/* profile */}
       {active === 1 && (
         <>
-          <div className="flex justify-center w-full">
+          <div className="flex justify-center w-full ">
             <div className="relative">
               <img
                src={`${user?.avatar?.url}`}
-                className="w-[150px] h-[150px] rounded-full object-cover border-[3px] border-[#dea23b] "
+                className="w-[150px] h-[150px] rounded-full shadow-lg object-cover border-[3px] border-[#dea23b] "
                 alt=""
               />
-              <div className="w-[30px] h-[30px] bg-[#E3E9EE] rounded-full flex items-center justify-center cursor-pointer absolute bottom-[5px] right-[5px]">
-                <input
-                  type="file"
-                  id="image"
-                  className="hidden"
-                  onChange={handleImage}
-                />
-                <label htmlFor="image">
-                  <AiOutlineCamera />
-                </label>
-              </div>
             </div>
           </div>
           <br />
@@ -487,7 +476,7 @@ const ChangePassword = () => {
   return (
     <div className="w-full px-5">
       <h1 className="block text-[25px] text-center font-[600] text-[#000000ba] pb-2">
-        Change Password
+        Changer le mot de passe
       </h1>
       <div className="w-full">
         <form

@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import styles from "../../styles/styles";
 import EventCard from "./EventCard";
 
 const Events = () => {
   const { allEvents, isLoading } = useSelector((state) => state.events);
+  const [shuffledEvents, setShuffledEvents] = useState([]);
+
+  useEffect(() => {
+    if (allEvents?.length > 0) {
+      setShuffledEvents(shuffleArray([...allEvents]));
+    }
+  }, [allEvents]);
+
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
 
   return (
     <>
@@ -25,7 +40,7 @@ const Events = () => {
         >
           <div className={`${styles.section} w-[80%] 800px:w-[80%] pl-0 `}>
             <h1
-              className={`text-[44x] leading-[1.2] 800px:text-[40px] text-[#3d3a3a]  font-[600] italic `}
+              className={`text-[44px] leading-[1.2] 800px:text-[40px] text-[#3d3a3a] font-[600] italic `}
             >
               Profitez de nos offres limitées sur une sélection <br />
               exclusive de produits. Ne manquez pas <br /> ces promotions
@@ -34,17 +49,17 @@ const Events = () => {
           </div>
         </div>
       </div>
-      <hr  className="p-8"/>
+      <hr className="p-8" />
       {!isLoading && (
         <>
           <div className={`${styles.section}`}>
             <div className="w-full grid">
-              {allEvents?.length > 0 ? (
-                allEvents.map((event) => (
+              {shuffledEvents?.length > 0 ? (
+                shuffledEvents.map((event) => (
                   <EventCard key={event.id} data={event} />
                 ))
               ) : (
-                <h4>Aucun événement disponible !</h4>
+                <h4>Aucun événement disponible !</h4>
               )}
             </div>
           </div>

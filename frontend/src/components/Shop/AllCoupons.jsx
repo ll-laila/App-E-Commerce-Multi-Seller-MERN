@@ -188,30 +188,6 @@ const AllCoupons = () => {
                   </div>
                   <br />
                   <div>
-                    <label className="pb-2">Montant minimum</label>
-                    <input
-                      type="number"
-                      name="value"
-                      value={minAmount}
-                      className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                      onChange={(e) => setMinAmout(e.target.value)}
-                      placeholder="Entrez le montant minimum de votre code promo ..."
-                    />
-                  </div>
-                  <br />
-                  <div>
-                    <label className="pb-2">Montant maximum</label>
-                    <input
-                      type="number"
-                      name="value"
-                      value={maxAmount}
-                      className="mt-2 appearance-none block w-full px-3 h-[35px] border border-gray-300 rounded-[3px] placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                      onChange={(e) => setMaxAmount(e.target.value)}
-                      placeholder="Entrez le montant maximum de votre code promo..."
-                    />
-                  </div>
-                  <br />
-                  <div>
                     <label className="pb-2">Produit sélectionné</label>
                     <select
                       className="w-full mt-2 border h-[35px] rounded-[5px]"

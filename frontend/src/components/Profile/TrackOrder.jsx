@@ -21,8 +21,8 @@ const TrackOrder = () => {
   return (
     <div className="w-full h-[80vh] flex justify-center items-center">
       {" "}
-      <div className="w-full h-[80vh] flex justify-center items-center shadow-lg ">
-        <div className="w-[40%] 800px:w-[40%] h-[40vh] bg-white rounded-md shadow-lg p-4">
+      <div className="w-full h-[80vh] flex justify-center items-center shadow-lg p-6 ">
+        <div className="w-[40%] 800px:w-[40%] h-[40vh] bg-white  rounded-md shadow-lg ">
           {data && data?.status === "Processing" ? (
             <h1 className="text-[50px] flex justify-center p-12">
               Votre commande est en cours de traitement en boutique.

@@ -15,8 +15,9 @@ const BestSellingPage = () => {
     const allProductsData = allProducts ? [...allProducts] : [];
     const sortedData = allProductsData?.sort((a,b) => b.sold_out - a.sold_out); 
     const first = sortedData && sortedData.slice(0, 10);
-    setData(first);
+    setData(first); 
   }, [allProducts]);
+
 
   return (
    <>

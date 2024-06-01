@@ -23,6 +23,8 @@ router.post(
           shopItemsMap.set(shopId, []);
         }
         shopItemsMap.get(shopId).push(item);
+        await updateOrder(item._id, item.qty);
+
       }
 
       // create an order for each shop
@@ -30,13 +32,21 @@ router.post(
 
       for (const [shopId, items] of shopItemsMap) {
         const order = await Order.create({
-          cart: items, 
+          cart: items,
           shippingAddress,
           user,
           totalPrice,
           paymentInfo,
         });
         orders.push(order);
+      }
+
+      async function updateOrder(id, qty) {
+        const product = await Product.findById(id);
+
+        product.stock -= qty;
+        product.sold_out += qty;
+        await product.save({ validateBeforeSave: false });
       }
 
       res.status(201).json({

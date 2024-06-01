@@ -228,7 +228,7 @@ const UserOrderDetails = () => {
           <br />
           {data?.status === "Delivered" && (
             <div
-              className={`${styles.button} text-white`}
+              className={`${styles.button} text-white p-3 `}
               onClick={refundHandler}
             >
               Accorder un remboursement
