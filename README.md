@@ -4,16 +4,15 @@ Le projet utilise la pile MERN (MongoDB, Express.js, React.js, Node.js) pour dé
 
 # comment exécuter le projet dans le local
 
--> 
-
-1- cd Frontend 
-
-
-2- npm start
+-> Pour le Frontend ( React sur le port 3000)
+    1- cd frontend 
+    2- npm start
 
 
+-> Pour le Backend ( Node sur le port 4000)
+    1- cd backend 
+    2- npm run dev
 
-cd backend
 
 
-npm run dev
+
