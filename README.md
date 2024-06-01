@@ -8,7 +8,6 @@ Le projet utilise la pile MERN (MongoDB, Express.js, React.js, Node.js) pour dé
 
 
     1- cd frontend 
-
     
     2- npm start
 
@@ -18,7 +17,6 @@ Le projet utilise la pile MERN (MongoDB, Express.js, React.js, Node.js) pour dé
 
     1- cd backend 
 
-    
     2- npm run dev
 
 
