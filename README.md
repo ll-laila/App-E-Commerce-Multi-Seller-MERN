@@ -4,7 +4,7 @@ Le projet utilise la pile MERN (MongoDB, Express.js, React.js, Node.js) pour dé
 
 # comment exécuter le projet dans le local
 
-cd Frontend
+cd Frontend 
 npm start
 
 cd backend
