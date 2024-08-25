@@ -19,3 +19,8 @@ Le projet utilise la pile MERN (MongoDB, Express.js, React.js, Node.js) pour dé
 
     2- npm run dev
 
+
+# Demo
+
+https://github.com/user-attachments/assets/5c4feb34-f70a-489d-ac0f-fdf5acf2eb73
+
