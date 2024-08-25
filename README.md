@@ -1,22 +1,19 @@
-# Application MERN E-Commerce Multi Vendeur.
+# MERN E-Commerce Multi-Vendor Application
 
-Le projet utilise la pile MERN (MongoDB, Express.js, React.js, Node.js) pour développer une plateforme e-commerce multi-vendeurs. Il offre une expérience client fluide et unifiée, tout en répondant aux besoins des vendeurs tiers. MongoDB gère la base de données, Express.js crée une API robuste, React.js fournit une interface utilisateur interactive et Node.js assure la gestion côté serveur.
+This project utilizes the MERN stack (MongoDB, Express.js, React.js, Node.js) to develop a multi-vendor e-commerce platform. It delivers a seamless and unified customer experience while catering to the needs of third-party sellers. MongoDB handles the database, Express.js creates a robust API, React.js provides an interactive user interface, and Node.js manages server-side operations.
 
-# comment exécuter le projet dans le local
+# How to Run the Project Locally
 
--> Pour le Frontend ( React sur le port 3000)
+-> For the Frontend (React on port 3000)
 
-
-    1- cd frontend 
+    1- cd frontend
     
     2- npm start
 
+-> For the Backend (Node on port 4000)
 
-
--> Pour le Backend ( Node sur le port 4000)
-
-    1- cd backend 
-
+    1- cd backend
+    
     2- npm run dev
 
 
